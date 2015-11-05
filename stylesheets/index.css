@@ -1,0 +1,80 @@
+.index{
+	margin: 0 40px; 
+}
+.index .int{
+	position: relative;
+	overflow: hidden;
+	height: 40px;
+	margin-bottom: 10px;
+}
+.index .int2 input{
+	padding-right: 90px;
+}
+.index .int2 span{
+	position: absolute;
+    z-index: 1;
+    display: block;
+    top: 10px;
+    right: 0;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 10px;
+    border-left: 1px solid #eee;
+}
+.index input{
+	box-sizing: border-box;
+	-webkit-box-sizing:border-box;
+	border-radius: 3px;
+	padding: 10px; 
+	border: 1px solid #eee;
+	width: 100%; 
+}
+.index input::-webkit-input-placeholder{
+	color: #ccc;
+}
+.index .wp{
+	color: #ccc;
+	position: relative;
+	padding-left: 22px;
+}
+.index .wp i{
+	display: inline-block;
+	border: 1px solid #eee;
+	background-color: #fff;
+	width: 14px;
+	height: 14px; 
+	position: absolute;
+	left: 0;
+	top: 1px;
+}
+.index .wp i.current:before,
+.index .wp i.current:after{
+	content: '';
+	position: absolute;
+	background-color: red;
+}
+.index .wp i.current:before{
+	width: 2px;
+    height: 8px;
+    left: 3px;
+    top: 4px;
+    -webkit-transform: rotate(-50deg);
+    transform: rotate(-50deg);
+}
+.index .wp i.current:after{
+    width: 2px;
+    height: 14px;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    right: 2px;
+    top: -1px;
+}
+.index .btn{
+	width: 100%;
+    padding: 10px 0;
+    background-color: red;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 3px;
+    margin-top: 40px;.
+}
