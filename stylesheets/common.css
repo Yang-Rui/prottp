@@ -5,7 +5,7 @@
 }
 html {
     color:#333;
-    background:#f8f8f8;
+    background-color: #f8f8f8;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
 }
@@ -24,28 +24,65 @@ button{
 li{
 	list-style: none;
 }
+
+[fl]{
+	float: left;
+}
+[fr]{
+	float: right;
+}
 /*定于全局颜色*/
+[clr-fff]{
+	color: #fff;
+}
 [clr-red]{
+	color: red;
+}
+[clr-ora]{
 	color: #ff5422;
+}
+[clr-dgrey]{
+	color: #666;
 }
 [clr-grey]{
 	color: #b5b5b5;
 }
-[bg-red]{
+[clr-lgrey]{
+	color: #ccc;
+}
+[bg-ora]{
 	background-color: #ff5422;	
+}
+[bg-fff]{
+	background-color: #fff;
+}
+[bg-lgrey]{
+	background-color: #f8f8f8;
+}
+[bg-op]{
+	background-color: rgba(0,0,0,.6);
 }
 [br-grey]{
 	border: 1px solid #eee; 
 }
-[hr-red].current{
+[br-org]{
+	border: 1px solid #ff5422;
+}
+[hr-ora].current{
 	color: #ff5422;
 	transition: color 1s;
 }
 input::-webkit-input-placeholder{
 	color: #ccc;
 }
+[fz-12]{
+	font-size: 12px;
+}
 [fz-14]{
 	font-size: 14px;
+}
+[fz-16]{
+	font-size: 16px;
 }
 
 /*定义基本class*/
@@ -54,7 +91,6 @@ input::-webkit-input-placeholder{
 }
 .btn:active{
     -webkit-filter: hue-rotate(-30deg);
-    filter: hue-rotate(-30deg);
 }
 
 /*定义所有sprites*/

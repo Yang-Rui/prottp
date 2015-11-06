@@ -6,8 +6,9 @@ require(['vue', 'Zepto'], function (Vue, $) {
 			msg_pos: '光大会展中心',
 			msg_tab_left: '今日预定',
 			msg_tab_right: '明日预定',
-			price: '',
-			num: '',
+			price: '12',
+			num: '12',
+			msg_btn: '去结算',
 			plist: []
 		},
 		methods:{
@@ -27,5 +28,10 @@ require(['vue', 'Zepto'], function (Vue, $) {
 				}
 			}
 		}
+	});
+
+	var ListItem = Vue.extend({
+		template: '',
+		data: {}
 	});
 })
