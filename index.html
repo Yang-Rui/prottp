@@ -10,17 +10,16 @@
 	</head>
 	<body>
 		<div id='j_index' class='index'>
-			<img src="" alt="">
+			<p class='icon icon-title'></p>
 			<p id='j_tel' class='int'>
-				<input type="num" placeholder='{{tel_placeholder}}'/>	
+				<input br-grey type="num" placeholder='{{tel_placeholder}}'/>	
 			</p>
 			<p id='j_icode' class='int int2'>
-				<input type="num" placeholder='{{icode_placeholder}}'/>	
-				<span clr-red>{{icode_msg}}</span>
+				<input br-grey type="num" placeholder='{{icode_placeholder}}'/>	
+				<span br-grey clr-red>{{icode_msg}}</span>
 			</p>
-			<p class='wp'><i v-on:click='chooseProt'></i>{{msg}}<a clr-red v-on:click='clickProt'>{{prot}}</a></p>	
-			<button class='btn' v-on:click='onSubmit'>{{btn_msg}}</button>
+			<p class='wp' clr-grey><i br-grey v-on:click='chooseProt'></i>{{msg}}<a clr-red v-on:click='clickProt'>{{prot}}</a></p>	
+			<button bg-red class='btn' v-on:click='onSubmit'>{{btn_msg}}</button>
 		</div>
-		<script type='text/javascript' src='./javascripts/index.js'></script>
 	</body>
 </html>

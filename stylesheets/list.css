@@ -1,0 +1,61 @@
+@charset "utf-8";
+.list .nav{
+	line-height: 21px;
+    position: relative;
+}
+.list .nav span{
+	display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -60px;
+    height: 100%;
+    line-height: 46px;
+}
+.list .icon-rm{
+	display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-position: 0px -70px;
+}
+.list .icon-pos{
+	display: inline-block;
+    width: 8px;
+    height: 12px;
+    background-position: -41px -84px;
+}
+.list .icon-arr-d{
+	display: inline-block;
+	width: 12px;
+	height: 10px;
+	background-position: -61px -84px;
+}
+.list .tab{
+	position: relative;
+	overflow: hidden;
+}
+.list .tab li{
+	position: relative;
+	float: left;
+	width: 50%;
+	text-align: center;
+	padding: 10px 0;
+	border-width: 0;
+    border-bottom-width: 1px;
+}
+.list .tab span{
+	width: 50%;
+	position: absolute;
+	height: 2px;
+	left: 0;
+	bottom: 0;
+	-webkit-transition: -webkit-transform .3s ease-out;
+	transition: transform .3s ease-out;
+}
+.list .tab:after{
+	clear: both;
+}
+.list .tab-move{
+	-webkit-transform: translateX(100%);
+	transform: translateX(100%);
+}

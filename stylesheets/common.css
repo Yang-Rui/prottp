@@ -4,7 +4,7 @@
 	padding: 0; 
 }
 html {
-    color:#000;
+    color:#333;
     background:#f8f8f8;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
@@ -21,11 +21,45 @@ button{
 	border: 0;
 	outline: none;
 }
-
+li{
+	list-style: none;
+}
+/*定于全局颜色*/
 [clr-red]{
-	color: red;
+	color: #ff5422;
+}
+[clr-grey]{
+	color: #b5b5b5;
+}
+[bg-red]{
+	background-color: #ff5422;	
+}
+[br-grey]{
+	border: 1px solid #eee; 
+}
+[hr-red].current{
+	color: #ff5422;
+	transition: color 1s;
+}
+input::-webkit-input-placeholder{
+	color: #ccc;
+}
+[fz-14]{
+	font-size: 14px;
+}
+
+/*定义基本class*/
+.hide{
+	display: none !important;
 }
 .btn:active{
     -webkit-filter: hue-rotate(-30deg);
     filter: hue-rotate(-30deg);
+}
+
+/*定义所有sprites*/
+.icon{
+	background-image: url(../images/sprites.png);
+    background-repeat: no-repeat;
+    background-size: 427px 438px;
 }

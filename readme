@@ -1,10 +1,18 @@
+todo路由
+todo公共的loading样式
+
+caution icon不适合用户点,需要放大
+
 登录/注册 首页
+todo实现登录/短信验证
+
 选菜/购物车/评论 列表页
+todo进入前获得定位
+todo请求附近的店铺
+todo上部弹出地址输入/地址联想
+todo左侧滑出菜单
+todo下侧滑出购物车
+
 订单填写页/确认页
 订单详情/订单列表/个人中心
 点评功能
-
-require.js
-vue.js
-bootstrap.js
-zepto.js
