@@ -10,6 +10,7 @@
 	</head>
 	<body>
 		<div bg-fff id='j_list' class='list'>
+			<searchmenu></searchmenu>
 			<p class='nav'>
 				<i class='icon icon-rm'></i>
 				<span fz-14>
@@ -27,7 +28,7 @@
 			</div>
 			
 			<!-- <ul class='hide'></ul> -->
-			<ul class='ilist' bg-lgrey>
+			<ul id='j_ilist' class='ilist' bg-lgrey v-for="n in plist">
 				<li bg-fff br-grey>
 					<div class='imgd'>
 						<img src="" style='width:100%;height:175px;'>
@@ -38,45 +39,9 @@
 								<i class="icon icon-hg current"></i>
 								<i class="icon icon-hg"></i>
 							</span>
-							<span clr-fff fr>剩余10/10</span>
+							<span clr-fff fr>剩余{{n.left}}/{{n.total}}</span>
 						</p>
-					</div>
-					<p fz-16 br-grey class='con'>蛋皮鳗鱼饭
-						<dfn clr-red fz-16>&yen;22</dfn>
-						<span fr>
-							<i class='icon icon-r'></i>
-							<i fz-16>0<em fz-12>份</em></i>
-							<i class='icon icon-p on'></i>
-						</span>
-					</p>
-					<div class='com'>
-						<img src=""> 
-						<p>
-							<span class='t' fz-16>朱阿姨小厨<em fz-12 clr-lgrey>四川资阳</em></span>
-							<span class='r' fz-12 clr-ora br-org>休息中，可预订明天</span>
-							<span class='s'>
-								<i class="icon star on"></i>
-								<i class="icon star on"></i>
-								<i class="icon star on"></i>
-								<i class="icon star on"></i>
-								<i class="icon star"></i>
-							</span>
-							<span class='b' clr-grey fz-12>56评论·210份</span>
-						</p>
-					</div>
-				</li>
-				<li bg-fff br-grey>
-					<div class='imgd'>
-						<img src="" style='width:100%;height:175px;'>
-						<p bg-op>
-							<span clr-fff>辣度</span>
-							<span>
-								<i class="icon icon-hg current"></i>
-								<i class="icon icon-hg current"></i>
-								<i class="icon icon-hg"></i>
-							</span>
-							<span clr-fff fr>剩余10/10</span>
-						</p>
+						<div clr-fff bg-op class='hide'>川菜今天天气不错</div>
 					</div>
 					<p fz-16 br-grey class='con'>蛋皮鳗鱼饭
 						<dfn clr-red fz-16>&yen;22</dfn>
@@ -103,7 +68,20 @@
 					</div>
 				</li>
 			</ul>
-			<p class='fbar' clr-dgrey br-grey fz-14><i class='icon icon-m'></i>&yen{{price}}（{{num}}份）<button bg-ora fz-14 class='btn'>{{msg_btn}}</button></p>
+			
+			
+
+			<p class='fbar hide' clr-dgrey br-grey fz-14><i class='icon icon-m'></i>&yen{{price}}（{{num}}份）<button bg-ora fz-14 class='btn' v-on:click='onSubmit'>{{msg_btn}}</button></p>
 		</div>
+		<template id='j_sm_tpl'>
+			<div class='search' bg-fff>
+				<div bg-ccc>
+					<i class='icon p'></i>
+					<input fz-14 type="text" placeholder={{msg_placeholder}}>
+					<span clr-red v-on:click='clickCancel'>取消</span>
+				</div>
+			</div>
+			
+		</template>
 	</body>
 </html>

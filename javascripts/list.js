@@ -1,5 +1,24 @@
 //做路由切换时需要改为define
 require(['vue', 'Zepto'], function (Vue, $) {
+
+	var CONST_BUTTON_MSG = '去结算';
+
+	var SearchMenu = Vue.extend({
+		template: '#j_sm_tpl',
+		data: function (){
+			return {
+				msg_placeholder: '请输入地址'
+			}
+		},
+		methods:{
+			clickCancel: function () {
+				$(this.$el).addClass('top-hide');
+			}
+		}
+	});
+	//注入的自定义tag名必须全小写
+	Vue.component('searchmenu', SearchMenu);
+
 	var List = new Vue({
 		el: '#j_list',
 		data: {
@@ -12,6 +31,7 @@ require(['vue', 'Zepto'], function (Vue, $) {
 			plist: []
 		},
 		methods:{
+			//选择某个tab
 			chooseTab: function (e) {
 				var $target = $(e.currentTarget),
 					$bar = $(this.$el).find('#j_bar');
@@ -26,12 +46,15 @@ require(['vue', 'Zepto'], function (Vue, $) {
 				}else{
 					$bar.removeClass('tab-move');
 				}
+			},
+			//点击提交按钮
+			onSubmit: function () {
+				//将请求到的数据列表放入数据对象中，渲染数据
+				this.$set('plist', [{left: 9, total: 99},{left: 10, total: 11}]);
 			}
 		}
 	});
 
-	var ListItem = Vue.extend({
-		template: '',
-		data: {}
-	});
+
+
 })

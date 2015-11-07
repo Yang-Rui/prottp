@@ -59,6 +59,9 @@ li{
 [bg-lgrey]{
 	background-color: #f8f8f8;
 }
+[bg-ccc]{
+	background-color: #ccc;
+}
 [bg-op]{
 	background-color: rgba(0,0,0,.6);
 }
@@ -98,4 +101,9 @@ input::-webkit-input-placeholder{
 	background-image: url(../images/sprites.png);
     background-repeat: no-repeat;
     background-size: 427px 438px;
+}
+
+.top-hide{
+	-webkit-transform: translateY(-100%);
+	transform: translateY(-100%);
 }
