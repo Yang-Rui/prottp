@@ -12,18 +12,29 @@
 		<div id='j_detail' class='detail'>
 			<section class="detail-carousel"></section>
 			<section class="kitchen-detail ljms-blc">
-				<img class="kitchen-avatar" src="{{kitchen.userPhoto}}" fl></img>
+				<img class="kitchen-avatar avatar" src="{{kitchen.userPhoto}}" fl />
 				<div class="kitchen-desc">
 					<div class="kitchen-brief">
-						<p><span fz=16>{{kitchen.displayName}}</span><span class="tip">{{kitchen.origin}}</span>
+						<p><span fz=16>{{kitchen.displayName}}</span><span class="tip">{{kitchen.origin}}</span></p>
 						<p><span clr="grey">{{kitchen.sales}}份</span><br /></p>
 						<p><i class="icon"></i>拿手菜: <span>{{kitchen.specialities}}</span></p>
 					</div>
 					<div class="kitchen-status">休息中，可预定明天</div>
-					<div class="kitchen-descirption" clr="hgrey">{{kitchen.description}}</div>
+					<p class="kitchen-descirption" clr="hgrey">{{kitchen.description}}</p>
 				</div>
 			</section>
 			<section class="kitchen-comments ljms-blc">
+				<div class="comment-cnt">{{kitchen.comments}}评论</div>
+				<ul class="comment-list">
+					<li v-for="cmt in comments.cmts">
+						<img class="avatar" src="{{cmt.userPhoto}}" fl/>
+						<div class="comment-desc">
+							<p><span class="comment-user" fz=16>{{cmt.userName}}</span></p>
+							<div class="comment-time tip">{{cmt.createTime}}</div>
+							<p clr="hgrey">{{cmt.content}}</p>
+						</div>
+					</li>
+				</ul>
 			</section>
 		</div>
 	</body>

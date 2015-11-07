@@ -6,22 +6,33 @@ require(['vue', 'Zepto'], function (Vue, $) {
 			kitchen: {
 				displayName: '抓一小处',
 				origin: '四川成都',
-				sales: '4',
+				photos: [
+					'a','b','c','d'
+				],
+				sales: 4,
 				rating: 4,
 				specialities: 'TEST TEST',
-				description: 'ABST sadgye eufihaf aoihaiuf aiuhafa fa.afiasfhui fs. ffas fhuh fu ahf yug ayfu gafl mdjkcai'
+				description: 'ABST sadgye eufihaf aoihaiuf aiuhafa fa.afiasfhui fs. ffas fhuh fu ahf yug ayfu gafl mdjkcai',
+				comments: 100
+			},
+			comments: {
+				cmts: [{
+					userName: 'hehehe',
+					userPhoto: 'hfshfiua',
+					rating: 2,
+					content: '很好很好很好很好很好很好 很好',
+					createTime: '2015/11/06 12:33:00'
+				}, {
+					userName: 'hehehe',
+					userPhoto: 'hfshfiua',
+					rating: 2,
+					content: '很好很好很好很好很好很好 很好',
+					createTime: '2015/11/06 12:33:00'
+				}]
 			}
 		},
 		methods: {
-			//选择复选框
-			chooseProt: function(e){
-				var $target = $(e.currentTarget);
-				if($target.hasClass('current')){
-					$target.removeClass('current');
-				}else{
-					$target.addClass('current');
-				}
-			},
+			
 			//点击协议
 			clickProt: function () {
 

@@ -2,10 +2,10 @@
     width: 100%;
     height: 185px;
 }
+
+/*kitchen*/
 .kitchen-detail {
-    padding: 6px;
     position: relative;
-    box-sizing: border-box;
 }
 .kitchen-brief span {
     margin-right: 5px;
@@ -18,16 +18,37 @@
     color: #d73300;
     box-shadow: 0 0 0 1px #d73300;
 }
-.kitchen-desc {
+.kitchen-desc,
+.comment-desc {
     padding: 0 0 0 12px;
+    min-height: 45px;
     overflow: hidden;
+    position: relative;
 }
-.kitchen-avatar {
-    display: inline-block;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
+
+/*comments*/
+.comment-cnt {
+    margin: 0 -6px;
+    padding: 8px 6px;
+    box-shadow: 0 1px 0 0px #dadada;
 }
+.comment-list {
+    margin: 0 -6px;
+}
+.comment-list > li {
+    padding: 16px 6px;
+    border-bottom: 1px solid #dadada;
+}
+.comment-list .comment-user {
+    line-height: 45px;
+}
+.comment-time {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+}
+
+
 
 .icon-heart {
     width: 20px;
