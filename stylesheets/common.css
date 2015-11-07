@@ -65,6 +65,43 @@ li{
 [bg-op]{
 	background-color: rgba(0,0,0,.6);
 }
+
+[clr="fff"]{
+	color: #fff;
+}
+[clr="red"]{
+	color: red;
+}
+[clr="ora"]{
+	color: #ff5422;
+}
+[clr="dgrey"]{
+	color: #666;
+}
+[clr="grey"]{
+	color: #b5b5b5;
+}
+[clr="hgrey"]{
+	color: #999;
+}
+[clr="lgrey"]{
+	color: #ccc;
+}
+[bg="ora"]{
+	background-color: #ff5422;	
+}
+[bg="fff"]{
+	background-color: #fff;
+}
+[bg="lgrey"]{
+	background-color: #f8f8f8;
+}
+[bg="ccc"]{
+	background-color: #ccc;
+}
+[bg="op"]{
+	background-color: rgba(0,0,0,.6);
+}
 [br-grey]{
 	border: 1px solid #eee; 
 }
@@ -88,6 +125,16 @@ input::-webkit-input-placeholder{
 	font-size: 16px;
 }
 
+[fz="12"]{
+	font-size: 12px;
+}
+[fz="14"]{
+	font-size: 14px;
+}
+[fz="16"]{
+	font-size: 16px;
+}
+
 /*定义基本class*/
 .hide{
 	display: none !important;
@@ -98,12 +145,27 @@ input::-webkit-input-placeholder{
 
 /*定义所有sprites*/
 .icon{
+	content: ' ';
+	display: inline-block;
 	background-image: url(../images/sprites.png);
-    background-repeat: no-repeat;
-    background-size: 427px 438px;
+ 	background-repeat: no-repeat;
+ 	background-size: 427px 438px;
 }
 
 .top-hide{
 	-webkit-transform: translateY(-100%);
 	transform: translateY(-100%);
+}
+
+/*定义所有白色block*/
+.ljms-blc {
+	display: block;
+	width: 100%;
+	background-color: #fff;
+	box-shadow: 0 1px 0 0px #dadada;
+	margin-bottom: 30px;
+}
+.tip {
+	font-size: 12px;
+	color: #999;
 }

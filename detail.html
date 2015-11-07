@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,minimal-ui">
+		<link rel="stylesheet" href="./stylesheets/common.css">
+		<link rel="stylesheet" href="./stylesheets/detail.css">
+		<script type='text/javascript' src='./javascripts/config.js'></script>
+		<script type='text/javascript' data-main='./javascripts/detail.js' src='./javascripts/lib/require.js'></script>
+	</head>
+	<body>
+		<div id='j_detail' class='detail'>
+			<section class="detail-carousel"></section>
+			<section class="kitchen-detail ljms-blc">
+				<img class="kitchen-avatar" src="{{kitchen.userPhoto}}" fl></img>
+				<div class="kitchen-desc">
+					<div class="kitchen-brief">
+						<p><span fz=16>{{kitchen.displayName}}</span><span class="tip">{{kitchen.origin}}</span>
+						<p><span clr="grey">{{kitchen.sales}}份</span><br /></p>
+						<p><i class="icon"></i>拿手菜: <span>{{kitchen.specialities}}</span></p>
+					</div>
+					<div class="kitchen-status">休息中，可预定明天</div>
+					<div class="kitchen-descirption" clr="hgrey">{{kitchen.description}}</div>
+				</div>
+			</section>
+			<section class="kitchen-comments ljms-blc">
+			</section>
+		</div>
+	</body>
+</html>

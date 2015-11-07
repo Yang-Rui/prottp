@@ -1,0 +1,35 @@
+.detail-carousel {
+    width: 100%;
+    height: 185px;
+}
+.kitchen-detail {
+    padding: 6px;
+    position: relative;
+    box-sizing: border-box;
+}
+.kitchen-brief span {
+    margin-right: 5px;
+}
+.kitchen-status {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    padding: 2px;
+    color: #d73300;
+    box-shadow: 0 0 0 1px #d73300;
+}
+.kitchen-desc {
+    padding: 0 0 0 12px;
+    overflow: hidden;
+}
+.kitchen-avatar {
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+.icon-heart {
+    width: 20px;
+    height: 20px;
+}
