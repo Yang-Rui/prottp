@@ -65,7 +65,9 @@ li{
 [bg-op]{
     background-color: rgba(0,0,0,.6);
 }
-
+[clr='000']{
+    color: #000;
+}
 [clr="fff"]{
     color: #fff;
 }
@@ -102,6 +104,9 @@ li{
 [bg="op"]{
     background-color: rgba(0,0,0,.6);
 }
+[br-ccc]{
+    border: 1px solid #ccc;
+}
 [br-grey]{
     border: 1px solid #eee;
 }
@@ -135,20 +140,6 @@ input::-webkit-input-placeholder{
     font-size: 16px;
 }
 
-/*margin*/
-[mgr="4"] {
-    margin-right: 4px;
-}
-[mgr="6"] {
-    margin-right: 4px;
-}
-[mgr="8"] {
-    margin-right: 4px;
-}
-[mgr="10"] {
-    margin-right: 4px;
-}
-
 /*定义基本class*/
 .hide{
     display: none !important;
@@ -162,25 +153,66 @@ input::-webkit-input-placeholder{
     content: ' ';
     display: inline-block;
     background-image: url(../images/sprites.png);
-     background-repeat: no-repeat;
-     background-size: 427px 438px;
-}
-.icon-star {
-    width: 12px;
-    height: 12px;
-    background-position: -111px -47px;
-}
-.icon-star[active] {
-    width: 12px;
-    height: 12px;
-    background-position: -89px -47px;
+    background-repeat: no-repeat;
+    background-size: 427px 438px;
 }
 
-.top-hide{
+/*向上滑出*/
+.top-out{
+    -webkit-transition: -webkit-transform .3s;
+    transition: transform .3s;
     -webkit-transform: translateY(-100%);
     transform: translateY(-100%);
 }
-
+/*从上进入*/
+.top-in{
+    -webkit-animation: top-in .3s;
+    animation: top-in .3s;
+}
+@-webkit-keyframes top-in{
+    0%{
+        -webkit-transform: translateY(-100%);
+    },
+    100%{
+        -webkit-transform: translateY(0);
+    }
+}
+@keyframes top-in{
+    0%{
+        transform: translateY(-100%);
+    },
+    100%{
+        transform: translateY(0);
+    }
+}
+/*向下滑出*/
+.down-out{
+    -webkit-transition: -webkit-transform .3s;
+    transition: transform .3s;
+    -webkit-transform: translateY(100%);
+    transform: translateY(100%);
+}
+/*从下进入*/
+.down-in{
+    -webkit-animation: down-in .3s;
+    animation: down-in .3s;
+}
+@-webkit-keyframes down-in{
+    0%{
+        -webkit-transform: translateY(100%);
+    },
+    100%{
+        -webkit-transform: translateY(0);
+    }
+}
+@keyframes down-in{
+    0%{
+        transform: translateY(100%);
+    },
+    100%{
+        transform: translateY(0);
+    }
+}
 /*定义所有白色block*/
 .ljms-blc {
     display: block;
@@ -200,4 +232,14 @@ input::-webkit-input-placeholder{
     height: 45px;
     display: inline-block;
     border: 50%;
+}
+
+.mask{
+    background-color: rgba(0,0,0,.6);
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
 }

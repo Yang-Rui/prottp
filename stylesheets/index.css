@@ -24,8 +24,8 @@
     border-left-width: 1px;
 }
 .index input{
-    box-sizing: border-box;
     -webkit-box-sizing:border-box;
+    box-sizing: border-box;
     border-radius: 3px;
     padding: 10px;
     width: 100%;
@@ -79,5 +79,6 @@
     width: 86px;
     height: 94px;
     background-position: -91px -294px;
-    margin: 70px auto;
+    margin: 70px auto 40px auto;
+    display: block;
 }

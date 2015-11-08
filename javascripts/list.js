@@ -2,6 +2,7 @@
 require(['vue', 'Zepto'], function (Vue, $) {
 
     var CONST_BUTTON_MSG = '去结算';
+    var CONST_ANIMATE_TIMEOUT = 300;
 
     var SearchMenu = Vue.extend({
         template: '#j_sm_tpl',
@@ -12,12 +13,25 @@ require(['vue', 'Zepto'], function (Vue, $) {
         },
         methods:{
             clickCancel: function () {
-                $(this.$el).addClass('top-hide');
+                var $self = $(this.$el);
+                $self.removeClass('top-in').addClass('top-out');
+                setTimeout(function(){
+                    $self.addClass('hide').removeClass('top-out')
+                }, CONST_ANIMATE_TIMEOUT);
             }
         }
     });
     //注入的自定义tag名必须全小写
     Vue.component('searchmenu', SearchMenu);
+
+    var MarketBox = Vue.extend({
+        template: '#j_m_tpl',
+        data: function () {
+
+        }
+    });
+
+    Vue.component('marketbox', MarketBox);
 
     var List = new Vue({
         el: '#j_list',
@@ -31,6 +45,10 @@ require(['vue', 'Zepto'], function (Vue, $) {
             plist: []
         },
         methods:{
+            //点击选择地址
+            onClickAddr: function () {
+                $(this.$el).find('.j_addr').removeClass('hide').addClass('top-in');
+            },
             //选择某个tab
             chooseTab: function (e) {
                 var $target = $(e.currentTarget),
@@ -48,13 +66,31 @@ require(['vue', 'Zepto'], function (Vue, $) {
                 }
             },
             //点击提交按钮
-            onSubmit: function () {
+            onSubmit: function (e) {
+                //阻止时间冒泡
+                e.preventDefault();
+                e.stopPropagation();
                 //将请求到的数据列表放入数据对象中，渲染数据
-                this.$set('plist', [{left: 9, total: 99},{left: 10, total: 11}]);
+            },
+            //点击底部bar
+            clickbbar: function (e) {
+                var $self = $(this.$el).find('.j_market');
+                if($self.hasClass('hide')){
+                    $self.removeClass('hide').addClass('down-in');
+                    $(this.$el).find('#j_bar').addClass('market-bg');
+                }else{
+                    $self.removeClass('down-in').addClass('down-out');
+                    $(this.$el).find('#j_bar').removeClass('market-bg');
+                    setTimeout(function () {
+                        $self.addClass('hide').removeClass('down-out');
+                    }, CONST_ANIMATE_TIMEOUT);
+                }
             }
         }
     });
 
-
+    setTimeout(function () {
+        List.$set('plist', [{left: 9, total: 99},{left: 10, total: 11}]);
+    }, 3000);
 
 })
