@@ -24,7 +24,11 @@ button{
 li{
     list-style: none;
 }
-
+input::-webkit-input-placeholder{
+    color: #ccc;
+}
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+.clearfix{*+height:1%;}
 [fl]{
     float: left;
 }
@@ -116,9 +120,6 @@ li{
 [hr-ora].current{
     color: #ff5422;
     transition: color 1s;
-}
-input::-webkit-input-placeholder{
-    color: #ccc;
 }
 [fz-12]{
     font-size: 12px;
@@ -219,9 +220,14 @@ input::-webkit-input-placeholder{
     box-sizing: border-box;
     width: 100%;
     background-color: #fff;
-    box-shadow: 0 1px 0 0px #dadada;
+    box-shadow: 0 1px 1px 0 #dadada;
     margin-bottom: 16px;
-    padding: 6px;
+    padding: 6px 8px 0 8px;
+}
+.ljms-blc-title {
+    margin: 0 -6px;
+    padding: 4px 6px 10px;
+    box-shadow: 0 1px 0 0px #dadada;
 }
 .tip {
     font-size: 12px;

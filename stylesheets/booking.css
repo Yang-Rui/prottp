@@ -1,0 +1,65 @@
+.booking input {
+    box-shadow: 0 0 0 1px #ddd;
+    padding: 5px;
+    border-radius: 2px;
+    width: 80%;
+    height: 25px;
+}
+
+.booking-info {
+    padding: 6px 2px;
+    border-bottom: 1px solid #ddd;
+}
+.booking-info:last-child {
+    border: none;
+}
+.booking-info-icon {
+
+}
+.booking-info .icon {
+    margin: 6px 2px 0 2%;
+}
+
+.booking-cart-list {
+    border-bottom: 1px solid #ddd;
+}
+.booking-cart-list {
+    border: none;
+}
+.booking-cart-list > li {
+    padding: 8px 0;
+    border-bottom: 1px solid #ccc;
+}
+.booking-cart-list > li:last-child {
+    border: none;
+}
+.booking-cart-pic {
+    width: 120px;
+    height: 80px;
+}
+.booking-goods-info {
+    overflow: hidden;
+}
+.booking-cash-info {
+    border-top: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    padding: 8px 0;
+}
+.booking-total {
+    padding: 6px 0;
+}
+.icon-person {
+    width: 20px;
+    height: 20px;
+    background-position: -54px -220px;
+}
+.icon-tel {
+    width: 20px;
+    height: 20px;
+    background-position: -54px -220px;
+}
+.icon-loc {
+    width: 20px;
+    height: 20px;
+    background-position: -75px -220px;
+}
