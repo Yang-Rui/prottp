@@ -13,7 +13,7 @@
 .kitchen-status {
     position: absolute;
     top: 6px;
-    right: 6px;
+    right: 1px;
     padding: 2px;
     color: #d73300;
     box-shadow: 0 0 0 1px #d73300;
@@ -39,6 +39,9 @@
     padding: 16px 6px;
     border-bottom: 1px solid #dadada;
 }
+.comment-list > li:last-child {
+    border: none;
+}
 .comment-list .comment-user {
     line-height: 45px;
 }
@@ -51,6 +54,7 @@
 
 
 .icon-heart {
-    width: 20px;
-    height: 20px;
+    width: 12px;
+    height: 12px;
+    background-position: -133px -47px;
 }

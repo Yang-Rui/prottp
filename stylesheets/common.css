@@ -1,7 +1,7 @@
 @charset "utf-8";
 * {
-	margin: 0;
-	padding: 0; 
+    margin: 0;
+    padding: 0;
 }
 html {
     color:#333;
@@ -10,134 +10,148 @@ html {
     -ms-text-size-adjust: 100%;
 }
 a {
-	text-decoration:none;
+    text-decoration:none;
 }
 body *{
-	font:12px/1.5 "Microsoft Yahei",tahoma,arial;
+    font:12px/1.5 "Microsoft Yahei",tahoma,arial;
 }
 img,
-input, 
+input,
 button{
-	border: 0;
-	outline: none;
+    border: 0;
+    outline: none;
 }
 li{
-	list-style: none;
+    list-style: none;
 }
 
 [fl]{
-	float: left;
+    float: left;
 }
 [fr]{
-	float: right;
+    float: right;
 }
 /*定于全局颜色*/
 [clr-fff]{
-	color: #fff;
+    color: #fff;
 }
 [clr-red]{
-	color: red;
+    color: red;
 }
 [clr-ora]{
-	color: #ff5422;
+    color: #ff5422;
 }
 [clr-dgrey]{
-	color: #666;
+    color: #666;
 }
 [clr-grey]{
-	color: #b5b5b5;
+    color: #b5b5b5;
 }
 [clr-lgrey]{
-	color: #ccc;
+    color: #ccc;
 }
 [bg-ora]{
-	background-color: #ff5422;	
+    background-color: #ff5422;
 }
 [bg-fff]{
-	background-color: #fff;
+    background-color: #fff;
 }
 [bg-lgrey]{
-	background-color: #f8f8f8;
+    background-color: #f8f8f8;
 }
 [bg-ccc]{
-	background-color: #ccc;
+    background-color: #ccc;
 }
 [bg-op]{
-	background-color: rgba(0,0,0,.6);
+    background-color: rgba(0,0,0,.6);
 }
 
 [clr="fff"]{
-	color: #fff;
+    color: #fff;
 }
 [clr="red"]{
-	color: red;
+    color: red;
 }
 [clr="ora"]{
-	color: #ff5422;
+    color: #ff5422;
 }
 [clr="dgrey"]{
-	color: #666;
+    color: #666;
 }
 [clr="grey"]{
-	color: #b5b5b5;
+    color: #b5b5b5;
 }
 [clr="hgrey"]{
-	color: #999;
+    color: #999;
 }
 [clr="lgrey"]{
-	color: #ccc;
+    color: #ccc;
 }
 [bg="ora"]{
-	background-color: #ff5422;	
+    background-color: #ff5422;
 }
 [bg="fff"]{
-	background-color: #fff;
+    background-color: #fff;
 }
 [bg="lgrey"]{
-	background-color: #f8f8f8;
+    background-color: #f8f8f8;
 }
 [bg="ccc"]{
-	background-color: #ccc;
+    background-color: #ccc;
 }
 [bg="op"]{
-	background-color: rgba(0,0,0,.6);
+    background-color: rgba(0,0,0,.6);
 }
 [br-grey]{
-	border: 1px solid #eee; 
+    border: 1px solid #eee;
 }
 [br-org]{
-	border: 1px solid #ff5422;
+    border: 1px solid #ff5422;
 }
 [hr-ora].current{
-	color: #ff5422;
-	transition: color 1s;
+    color: #ff5422;
+    transition: color 1s;
 }
 input::-webkit-input-placeholder{
-	color: #ccc;
+    color: #ccc;
 }
 [fz-12]{
-	font-size: 12px;
+    font-size: 12px;
 }
 [fz-14]{
-	font-size: 14px;
+    font-size: 14px;
 }
 [fz-16]{
-	font-size: 16px;
+    font-size: 16px;
 }
 
 [fz="12"]{
-	font-size: 12px;
+    font-size: 12px;
 }
 [fz="14"]{
-	font-size: 14px;
+    font-size: 14px;
 }
 [fz="16"]{
-	font-size: 16px;
+    font-size: 16px;
+}
+
+/*margin*/
+[mgr="4"] {
+    margin-right: 4px;
+}
+[mgr="6"] {
+    margin-right: 4px;
+}
+[mgr="8"] {
+    margin-right: 4px;
+}
+[mgr="10"] {
+    margin-right: 4px;
 }
 
 /*定义基本class*/
 .hide{
-	display: none !important;
+    display: none !important;
 }
 .btn:active{
     -webkit-filter: hue-rotate(-30deg);
@@ -145,35 +159,45 @@ input::-webkit-input-placeholder{
 
 /*定义所有sprites*/
 .icon{
-	content: ' ';
-	display: inline-block;
-	background-image: url(../images/sprites.png);
- 	background-repeat: no-repeat;
- 	background-size: 427px 438px;
+    content: ' ';
+    display: inline-block;
+    background-image: url(../images/sprites.png);
+     background-repeat: no-repeat;
+     background-size: 427px 438px;
+}
+.icon-star {
+    width: 12px;
+    height: 12px;
+    background-position: -111px -47px;
+}
+.icon-star[active] {
+    width: 12px;
+    height: 12px;
+    background-position: -89px -47px;
 }
 
 .top-hide{
-	-webkit-transform: translateY(-100%);
-	transform: translateY(-100%);
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
 }
 
 /*定义所有白色block*/
 .ljms-blc {
-	display: block;
-	box-sizing: border-box;
-	width: 100%;
-	background-color: #fff;
-	box-shadow: 0 1px 0 0px #dadada;
-	margin-bottom: 16px;
-	padding: 6px;
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 1px 0 0px #dadada;
+    margin-bottom: 16px;
+    padding: 6px;
 }
 .tip {
-	font-size: 12px;
-	color: #999;
+    font-size: 12px;
+    color: #999;
 }
 .avatar {
-	width: 45px;
-	height: 45px;
-	display: inline-block;
-	border: 50%;
+    width: 45px;
+    height: 45px;
+    display: inline-block;
+    border: 50%;
 }
