@@ -1,5 +1,5 @@
 //做路由切换时需要改为define
-require(['vue', 'Zepto'], function (Vue, $) {
+require(['vue', 'Zepto', 'req'], function (Vue, $, Req) {
 
     var CONST_BUTTON_MSG = '去结算';
     var CONST_ANIMATE_TIMEOUT = 300;
@@ -70,17 +70,42 @@ require(['vue', 'Zepto'], function (Vue, $) {
                 //阻止时间冒泡
                 e.preventDefault();
                 e.stopPropagation();
+                var self = this;
                 //将请求到的数据列表放入数据对象中，渲染数据
+                var url = Req.getReqURL('reqLocation');
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    dataType: 'jsonp',
+                    content: self,
+                    data: {
+                        searchStr: ''
+                    },
+                    jsonp: 'test',
+                    jsonpCallback: 'json',
+                    success: function (data) {
+                        console.log(JSON.stringify(data));
+                    },
+                    error: function (data) {
+                        console.log(JSON.stringify(data));
+                    },
+                    complete: function (data) {
+                        console.log(JSON.stringify(data));
+                    }
+                })
+            },
+            test: function (data){
+                console.log(JSON.stringify(data));
             },
             //点击底部bar
             clickbbar: function (e) {
                 var $self = $(this.$el).find('.j_market');
                 if($self.hasClass('hide')){
                     $self.removeClass('hide').addClass('down-in');
-                    $(this.$el).find('#j_bar').addClass('market-bg');
+                    $(this.$el).find('#j_fbar').addClass('market-bg');
                 }else{
                     $self.removeClass('down-in').addClass('down-out');
-                    $(this.$el).find('#j_bar').removeClass('market-bg');
+                    $(this.$el).find('#j_fbar').removeClass('market-bg');
                     setTimeout(function () {
                         $self.addClass('hide').removeClass('down-out');
                     }, CONST_ANIMATE_TIMEOUT);
@@ -88,6 +113,11 @@ require(['vue', 'Zepto'], function (Vue, $) {
             }
         }
     });
+
+    window.test = function(data){
+        alert(1);
+        console.log(JSON.stringify(data));
+    }
 
     setTimeout(function () {
         List.$set('plist', [{left: 9, total: 99},{left: 10, total: 11}]);

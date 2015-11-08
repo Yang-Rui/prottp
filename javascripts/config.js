@@ -4,6 +4,7 @@ var require = {
             vue: './lib/vue',
             Zepto: './lib/zepto.min',
             //helper
-            Carousel: './helper/ui.carousel'
+            Carousel: './helper/ui.carousel',
+            req: './com/request'
         }
 };

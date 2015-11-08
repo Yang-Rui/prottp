@@ -34,7 +34,7 @@
                         <img src="" style='width:100%;height:175px;'>
                         <p bg-op>
                             <span clr="fff">辣度</span>
-                            <span class='pbar'>
+                            <span>
                                 <i class="icon icon-hg current"></i>
                                 <i class="icon icon-hg current"></i>
                                 <i class="icon icon-hg"></i>
@@ -45,7 +45,7 @@
                     </div>
                     <p fz-16 br-grey class='con'>蛋皮鳗鱼饭
                         <dfn clr="red" fz-16>&yen;22</dfn>
-                        <span fr>
+                        <span class='pbar' fr>
                             <i class='icon icon-r'></i>
                             <i fz-16>0<em fz-12>份</em></i>
                             <i class='icon icon-p on'></i>
@@ -71,7 +71,7 @@
 
             <marketbox></marketbox>
 
-            <p class='fbar' id='j_bar' clr-dgrey br-ccc fz-14 v-on:click='clickbbar'><i class='icon icon-m'></i>&yen{{price}}（{{num}}份）<button bg-ora fz-14 class='btn' v-on:click='onSubmit'>{{msg_btn}}</button></p>
+            <p class='fbar' id='j_fbar' clr-dgrey br-ccc fz-14 v-on:click='clickbbar'><i class='icon icon-m'></i>&yen{{price}}（{{num}}份）<button bg-ora fz-14 class='btn' v-on:click='onSubmit'>{{msg_btn}}</button></p>
         </div>
         <!--搜索菜单模板-->
         <template id='j_sm_tpl'>
