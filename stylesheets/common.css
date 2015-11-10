@@ -249,3 +249,6 @@ input::-webkit-input-placeholder{
     position: absolute;
     z-index: 1;
 }
+li:active{
+    background-color: #eee;
+}

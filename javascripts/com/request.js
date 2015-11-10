@@ -11,6 +11,8 @@ define(['Zepto'], function ($) {
         reqHash: {
             //查询位置
             reqLocation: ['GET', 'unsecure/buildings'],
+            //请求菜单
+            reqMenu: ['GET', 'unsecure/menu/{buildingId}/{date}'],
             //厨房信息
             kitchenInfo: ['GET', 'unsecure/kitchen/{kitchenId}']
         },
@@ -20,7 +22,7 @@ define(['Zepto'], function ($) {
             @success function
             @error function
         */
-        execute: function (reqName, params, success, error) {
+        execute: function (reqName, params, success, error, scope) {
             var _self = this,
                 reqUrl = this.getReqURL(reqName, params);
 
@@ -29,18 +31,20 @@ define(['Zepto'], function ($) {
             }
 
             $.ajax({
-                    type: _self.reqHash[reqName][0],
-                    url: reqUrl,
-                    dataType: 'json',
-                    content: self,
-                    data: _self.reqHash[reqName][0] == 'POST' ? params : {},
-                    success: function (data) {
-                        success && typeof success == 'function' && success.call(this);
-                    },
-                    error: function (data) {
-                        error && typeof error == 'function' && error.call(this);
-                    },
-                });
+                type: _self.reqHash[reqName][0],
+                url: reqUrl,
+                dataType: 'json',
+                content: self,
+                data: _self.reqHash[reqName][0] == 'POST' ? params : {},
+                success: function (data) {
+                    console.log(reqName + '请求成功');
+                    success && typeof success == 'function' && success.call(scope, data);
+                },
+                error: function (data) {
+                    console.log(reqName + '请求失败');
+                    error && typeof error == 'function' && error.call(scope, data);
+                },
+            });
         },
         /*检测网络环境*/
         getEnvironment: function () {

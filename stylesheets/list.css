@@ -67,6 +67,9 @@
     -webkit-transform: translateX(100%);
     transform: translateX(100%);
 }
+.list .ilist{
+    padding-bottom: 40px;
+}
 .list .ilist li{
     padding: 10px 10px 0 10px;
     margin-bottom: 10px;
@@ -223,7 +226,7 @@
     position: absolute;
     left: 0;
     top: 0;
-    z-index: 2;
+    z-index: 3;
     height: 100%;
     width: 100%;
 }
@@ -248,11 +251,19 @@
     margin-top: -6px;
     background-position: -289px -400px;
 }
+.search .llist li{
+    padding: 10px;
+    border-width: 0;
+    border-bottom-width: 1px;
+}
 .search div span{
     display: inline-block;
     width: 17%;
     text-align: center;
     font-size: 14px;
+}
+.search .warns{
+    padding: 10px;
 }
 .market{
     position: fixed;
