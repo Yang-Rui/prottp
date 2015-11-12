@@ -5,6 +5,7 @@ var require = {
             Zepto: './lib/zepto.min',
             //helper
             Carousel: './helper/ui.carousel',
-            req: './com/request'
+            req: './com/request',
+            loading: './com/loading'
         }
 };

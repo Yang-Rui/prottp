@@ -29,10 +29,10 @@
 
             <!-- <ul class='hide'></ul> -->
             <ul id='j_ilist' class='ilist' bg-lgrey >
-                <li bg-fff br-grey v-for="n in plist" data-did={{n.dishId}}>
+                <li class='j_pitem' bg-fff br-grey v-for="n in plist" data-did={{n.dishId}}>
                     <div @click='showMsg' class='imgd j_dish'>
-                        <img v-bind:src="n.photo" style='width:100%;height:175px;'>
-                        <p bg-op>
+                        <img v-bind:src="n.photo">
+                        <p id='j_sbar' bg-op>
                             <span clr="fff">辣度</span>
                             <span>
                                 <template v-for='i in 3'>
@@ -40,16 +40,30 @@
                                     <i v-else class="icon icon-hg"></i>
                                 </template>
                             </span>
-                            <span clr="fff" fr>剩余{{n.inStock}}/{{n.inStock + n.soldOut}}</span>
+                            <span clr="fff" fr>剩余&nbsp;{{n.inStock}}/{{n.inStock + n.soldOut}}&nbsp;份</span>
                         </p>
-                        <div clr="fff" bg-op class='j_desc hide'>{{n.description}}</div>
+                        <div clr="fff" bg-op class='j_desc hide'>
+                        {{n.description}}
+                            <p>
+                                <span clr="fff">辣度</span>
+                                <span>
+                                    <template v-for='i in 3'>
+                                        <i v-if='i < n.spiciness' class="icon icon-hg current" ></i>
+                                        <i v-else class="icon icon-hg"></i>
+                                    </template>
+                                </span>
+                                <span clr="fff" fr>剩余&nbsp;{{n.inStock}}/{{n.inStock + n.soldOut}}&nbsp;份</span>
+                            </p>
+                        </div>
                     </div>
                     <p fz-16 br-grey class='con'>{{n.displayName}}
                         <dfn clr="red" fz-16>&yen;{{n.price}}</dfn>
                         <span class='pbar' fr>
-                            <i class='icon icon-r'></i>
+                            <i class='icon icon-r' v-if='n.bnum == 0'></i>
+                            <i class='icon icon-r on' v-else @click='clickReduce'></i>
                             <i fz-16>{{n.bnum || 0}}<em fz-12>份</em></i>
-                            <i class='icon icon-p on'></i>
+                            <i class='icon icon-p on' @click='clickAdd' v-if='n.bnum < n.inStock'></i>
+                            <i class='icon icon-p' v-else></i>
                         </span>
                     </p>
                     <div class='com'>
@@ -71,7 +85,7 @@
 
             <marketbox></marketbox>
 
-            <p class='fbar' id='j_fbar' clr-dgrey br-ccc fz-14 v-on:click='clickbbar'><i class='icon icon-m'></i>&yen{{price}}（{{num}}份）<button bg-ora fz-14 class='btn' v-on:click='onSubmit'>{{msg_btn}}</button></p>
+            <p class='fbar' id='j_fbar' clr-dgrey br-ccc fz-14 v-on:click='clickbbar'><i class='icon icon-m'></i>&yen{{totalPrice}}（{{totalBnum}}份）<button bg-ora fz-14 class='btn' v-on:click='onSubmit'>{{msg_btn}}</button></p>
         </div>
         <!--搜索菜单模板-->
         <template id='j_sm_tpl'>
@@ -81,9 +95,9 @@
                     <input id='j_input' fz-14 type="text" @input='inputAddr' placeholder={{msg_placeholder}} value='{{input_val}}'>
                     <span clr="red" v-on:click='clickCancel'>取消</span>
                 </div>
-                <p id='j_warns' class='warns'>{{nolocation_msg}}</p>
-                <ul id='j_llist' class='llist' v-for='n in llist'>
-                    <li @click='clickAddr' br-grey data-id={{n.id}}>{{n.name}}&nbsp;(&nbsp;{{n.address}}&nbsp;)&nbsp;</li>
+                <p id='j_warns' class='warns' fz-14>{{nolocation_msg}}</p>
+                <ul id='j_llist' class='llist'>
+                    <li @click='clickAddr' v-for='n in llist' br-grey fz-14 data-id={{n.id}}>{{n.name}}&nbsp;(&nbsp;{{n.address}}&nbsp;)&nbsp;</li>
                 </ul>
             </div>
         </template>
@@ -93,16 +107,19 @@
                 <div class='mask'></div>
                 <div class='cont market-bg' clr-dgrey fz-14>
                     <ul>
-                        <li fz-14 br-ccc>
-                            红烧狮子头
-                            <dfn fz-14>&yen;22</dfn>
-                            <span class='pbar' fr>
-                                <i class='icon icon-r'></i>
-                                <i fz-14>0</i>
-                                <i class='icon icon-p on'></i>
-                            </span>
-                        </li>
-                        <li></li>
+                        <template v-for='n in plist'>
+                            <li class='j_pitem' fz-14 br-ccc data-did={{n.dishId}}>
+                                {{n.displayName}}
+                                <dfn fz-14>&yen;{{n.price}}</dfn>
+                                <span class='pbar' fr>
+                                    <i class='icon icon-r' v-if='n.bnum == 0'></i>
+                                    <i class='icon icon-r on' v-else @click='clickReduce'></i>
+                                    <i fz-14>{{n.bnum}}</i>
+                                    <i class='icon icon-p on' @click='clickAdd' v-if='n.bnum < n.inStock'></i>
+                                    <i class='icon icon-p' v-else></i>
+                                </span>
+                            </li>
+                        </template>
                     </ul>
                 </div>
             </div>

@@ -2,6 +2,8 @@
 * {
     margin: 0;
     padding: 0;
+    -moz-user-select: none;
+    -webkit-user-select: none;
 }
 html {
     color:#333;
@@ -14,6 +16,9 @@ a {
 }
 body *{
     font:12px/1.5 "Microsoft Yahei",tahoma,arial;
+}
+img{
+    display: block;
 }
 img,
 input,
@@ -146,6 +151,7 @@ input::-webkit-input-placeholder{
     display: none !important;
 }
 .btn:active{
+    will-change: -webkit-filter;
     -webkit-filter: hue-rotate(-30deg);
 }
 
@@ -160,6 +166,7 @@ input::-webkit-input-placeholder{
 
 /*向上滑出*/
 .top-out{
+    will-change: transform;
     -webkit-transition: -webkit-transform .3s;
     transition: transform .3s;
     -webkit-transform: translateY(-100%);
@@ -167,6 +174,7 @@ input::-webkit-input-placeholder{
 }
 /*从上进入*/
 .top-in{
+    will-change: transform;
     -webkit-animation: top-in .3s;
     animation: top-in .3s;
 }
@@ -188,6 +196,7 @@ input::-webkit-input-placeholder{
 }
 /*向下滑出*/
 .down-out{
+    will-change: transform;
     -webkit-transition: -webkit-transform .3s;
     transition: transform .3s;
     -webkit-transform: translateY(100%);
@@ -195,6 +204,7 @@ input::-webkit-input-placeholder{
 }
 /*从下进入*/
 .down-in{
+    will-change: transform;
     -webkit-animation: down-in .3s;
     animation: down-in .3s;
 }
@@ -249,6 +259,75 @@ input::-webkit-input-placeholder{
     position: absolute;
     z-index: 1;
 }
-li:active{
-    background-color: #eee;
+.center{
+    width: 80px;
+    height: 110px;
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    -webkit-transform: translateY(-50%) translateX(-50%);
+    transform: translateY(-50%) translateX(-50%);
+}
+.loading:before{
+    width: 50%;
+    height: 50%;
+    background: #eee;
+    border-radius: 100% 0 0 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '';
+}
+.loading:after{
+    background: #666;
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    content: '';
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+.loading-word{
+    position: absolute;
+    width: 80px;
+    bottom: 0;
+    color: #fff;
+    text-align: center;
+    left: 0;
+}
+.loading{
+    text-indent: -999px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #eee;
+    background: -webkit-linear-gradient(left, #eee 10%, rgba(255, 255, 255, 0) 42%);
+    background: linear-gradient(to right, #eee 10%, rgba(255, 255, 255, 0) 42%);
+    position: absolute;
+    -webkit-animation: load3 1.4s infinite linear;
+    animation: load3 1.4s infinite linear;
+}
+@-webkit-keyframes load3 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@keyframes load3 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
 }

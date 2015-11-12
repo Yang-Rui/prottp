@@ -1,5 +1,5 @@
 //做路由切换时需要改为define
-require(['vue', 'Zepto', 'req'], function (Vue, $, Req) {
+require(['vue', 'Zepto', 'req', 'loading'], function (Vue, $, Req, Loading) {
 
     var CONST_BUTTON_MSG = '去结算';
     var CONST_ANIMATE_TIMEOUT = 300;
@@ -36,6 +36,7 @@ require(['vue', 'Zepto', 'req'], function (Vue, $, Req) {
                 }
 
                 this.$dispatch('chooseALocation', obj);
+                this.$dispatch('showBottomBar');
                 this.hideMenu();
             },
             inputAddr: function(e){
@@ -82,6 +83,7 @@ require(['vue', 'Zepto', 'req'], function (Vue, $, Req) {
             },
             clickCancel: function () {
                 this.hideMenu();
+                this.$dispatch('showBottomBar');
             },
             hideMenu: function () {
                 var $self = $(this.$el);
@@ -99,7 +101,49 @@ require(['vue', 'Zepto', 'req'], function (Vue, $, Req) {
     var MarketBox = Vue.extend({
         template: '#j_m_tpl',
         data: function () {
-
+            return {
+                plist: [],
+                totalBnum: 0,
+                totalPrice: 0
+            };
+        },
+        events:{
+            'initMarket': function(data, totalBnum, totalPrice){
+                this.plist = data;
+                //在子组件里有父对象完整的价格和数量映射
+                this.totalBnum = totalBnum;
+                this.totalPrice = totalPrice;
+            }
+        },
+        methods:{
+            //点击增加
+            clickAdd: function(e){
+                var $target = $(e.target).parents('.j_pitem'),
+                    did = $target.data('did');
+                for(var i = 0, len = this.plist && this.plist.length; i < len; i++){
+                    if(this.plist[i].dishId == did){
+                        this.plist[i].bnum++;
+                        this.totalBnum++;
+                        this.totalPrice += this.plist[i].price;
+                        this.$dispatch('updateBnumAndPrice', this.totalBnum, this.totalPrice);
+                        break;
+                    }
+                }
+            },
+            //点击减少
+            clickReduce: function(e){
+                var $target = $(e.target).parents('.j_pitem'),
+                    did = $target.data('did');
+                for(var i = 0, len = this.plist && this.plist.length; i < len; i++){
+                    if(this.plist[i].dishId == did){
+                        this.plist[i].bnum--;
+                        this.totalBnum--;
+                        this.totalPrice -= this.plist[i].price;
+                        this.$dispatch('updateBnumAndPrice', this.totalBnum, this.totalPrice);
+                        break;
+                    }
+                }
+            }
         }
     });
 
@@ -111,16 +155,29 @@ require(['vue', 'Zepto', 'req'], function (Vue, $, Req) {
             msg_pos: '光大会展中心',
             msg_tab_left: '今日预定',
             msg_tab_right: '明日预定',
-            price: '12',
-            num: '12',
             msg_btn: '去结算',
-            plist: []
+            plist: [],
+            //总预定数
+            totalBnum: 0,
+            //总价格
+            totalPrice: 0
         },
         events:{
+            //显示底部的预订栏
+            'showBottomBar': function(){
+                $(this.$el).find('#j_fbar').removeClass('hide');
+            },
+            //选择了一个地标
             'chooseALocation': function(lObj){
                 //更改title的值
                 this.msg_pos = lObj.name;
-                this.requestPList(lObj.id);
+                this.locationId = lObj.id;
+                this.requestPList();
+            },
+            //更新价格和预订数
+            'updateBnumAndPrice': function(bnum, price){
+                this.totalBnum = bnum;
+                this.totalPrice = price;
             }
         },
         methods:{
@@ -129,6 +186,7 @@ require(['vue', 'Zepto', 'req'], function (Vue, $, Req) {
                 $(this.$el).find('.j_addr').removeClass('hide').addClass('top-in');
                 this.$broadcast('searchMenuInit', this.msg_pos);
                 //触发子类的事件
+                $(this.$el).find('#j_fbar').addClass('hide');
             },
             //选择某个tab
             chooseTab: function (e) {
@@ -138,13 +196,31 @@ require(['vue', 'Zepto', 'req'], function (Vue, $, Req) {
                 //处理字体变色
                 if(!$target.hasClass('current')){
                     $target.addClass('current').siblings().removeClass('current');
+                }else{
+                    //重复点击直接返回
+                    return;
                 }
                 //处理边框
+                this.resetBnumAndPrice();
+
                 if($target.data('type')){
                     $bar.addClass('tab-move');
+                    this.requestPList(true);
                 }else{
                     $bar.removeClass('tab-move');
+                    this.requestPList(false);
                 }
+
+            },
+            //重置
+            resetBnumAndPrice: function () {
+                if(this.plist){
+                    for(var i = 0, len = this.plist.length; i < len; i++){
+                        this.plist[i].bnum = 0;
+                    }
+                }
+                this.totalBnum = 0;
+                this.totalPrice = 0;
             },
             //点击提交按钮
             onSubmit: function (e) {
@@ -152,8 +228,12 @@ require(['vue', 'Zepto', 'req'], function (Vue, $, Req) {
                 e.preventDefault();
                 e.stopPropagation();
             },
-            requestPList: function (id, notNow){
+            requestPList: function (notNow){
                 var d, dateString;
+                if(!this.locationId){
+                    return;
+                }
+
                 if(!notNow){
                     d = new Date();
                     dateString = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
@@ -163,8 +243,21 @@ require(['vue', 'Zepto', 'req'], function (Vue, $, Req) {
                     dateString = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
                 }
 
-                Req.execute('reqMenu', {buildingId: id, date: dateString}, function(data){
+                Loading.showLoading();
+                Req.execute('reqMenu', {buildingId: this.locationId, date: dateString}, function(data){
                     if(data.length > 0){
+                        Loading.hideLoading();
+                        //在测试环境重定向图片地址
+                        if(Req.getEnvironment() == 'dev'){
+                            for(var i = 0, len = data.length; i < len; i++){
+                                data[i].photo = 'http://localhost:8088' + data[i].photo;
+                                data[i].userPhoto = 'http://localhost:8088' + data[i].userPhoto;
+                            }
+                        }
+                        for(var i = 0 , len = data.length; i < len; i ++){
+                            //初始化选购数量
+                            data[i].bnum = 0;
+                        }
                         this.plist = data;
                     }
                 }, function(data){
@@ -177,6 +270,7 @@ require(['vue', 'Zepto', 'req'], function (Vue, $, Req) {
                 if($self.hasClass('hide')){
                     $self.removeClass('hide').addClass('down-in');
                     $(this.$el).find('#j_fbar').addClass('market-bg');
+                    this.$broadcast('initMarket', this.plist, this.totalBnum, this.totalPrice);
                 }else{
                     $self.removeClass('down-in').addClass('down-out');
                     $(this.$el).find('#j_fbar').removeClass('market-bg');
@@ -187,11 +281,44 @@ require(['vue', 'Zepto', 'req'], function (Vue, $, Req) {
             },
             showMsg: function(e){
                 var $target = $(e.target).parents('.j_dish'),
-                    $desc = $target.find('.j_desc');
+                    $desc = $target.find('.j_desc'),
+                    self = this;
+
                 if($desc.hasClass('hide')){
-                    $desc.removeClass('hide').css('height', '100%');
+                    $desc.removeClass('hide down-out').addClass('down-in');
+                    $target.find('#j_sbar').hide();
                 }else{
-                    $desc.addClass('hide').css('height', 0);
+                    $desc.removeClass('down-in').addClass('down-out');
+                    setTimeout(function(){
+                        $desc.addClass('hide');
+                        $target.find('#j_sbar').show();
+                    }, CONST_ANIMATE_TIMEOUT);
+                }
+            },
+            //点击增加
+            clickAdd: function(e){
+                var $target = $(e.target).parents('.j_pitem'),
+                    did = $target.data('did');
+                for(var i = 0, len = this.plist && this.plist.length; i < len; i++){
+                    if(this.plist[i].dishId == did){
+                        this.plist[i].bnum++;
+                        this.totalBnum++;
+                        this.totalPrice += this.plist[i].price;
+                        break;
+                    }
+                }
+            },
+            //点击减少
+            clickReduce: function(e){
+                var $target = $(e.target).parents('.j_pitem'),
+                    did = $target.data('did');
+                for(var i = 0, len = this.plist && this.plist.length; i < len; i++){
+                    if(this.plist[i].dishId == did){
+                        this.plist[i].bnum--;
+                        this.totalBnum--;
+                        this.totalPrice -= this.plist[i].price;
+                        break;
+                    }
                 }
             }
         }
