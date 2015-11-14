@@ -332,3 +332,54 @@
 .search .llist li:active{
     background-color: #eee;
 }
+.lmenu{
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+}
+.lmenu ul{
+    width: 50%;
+    height: 100%;
+    position: absolute;
+    z-index: 2;
+    padding: 40px 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-width: 0;
+    border-top-width: 1px;
+}
+.lmenu ul li:first-of-type{
+    border-top-width: 1px;
+}
+.lmenu ul li{
+    margin: 0 10px;
+    position: relative;
+    padding: 15px 30px;
+    border-width: 0;
+    border-bottom-width: 1px;
+}
+.lmenu ul li i.icon{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 19px;
+    left: 10px;
+}
+.i-login{
+    background-position: -114px -15px;
+}
+.i-account{
+    background-position: -15px -15px;
+}
+.i-order{
+    background-position: -39px -15px;
+}
+.i-config{
+    background-position: -65px -15px;
+}
+.i-about{
+    background-position: -88px -15px;
+}

@@ -1,2 +1,8 @@
 # ignore .DS_Store
 .DS_Store
+/javascripts/lib/vue-router.min.js
+/javascripts/lib/text.js
+/javascripts/lib/vue-router.js
+/test.html
+/home.html
+/javascripts/main.js

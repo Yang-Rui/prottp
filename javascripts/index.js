@@ -1,14 +1,11 @@
 //做路由切换时需要改为define
-require(['vue', 'Zepto'], function (Vue, $) {
+define(['vue', 'Zepto', 'req'], function (Vue, $, Req) {
+
     var Index = new Vue({
         el: '#j_index',
         data: {
-            tel_placeholder: '请输入手机号码',
-            icode_placeholder: '请输入验证码',
-            icode_msg: '获取验证码',
-            msg: '我已看过并同意餐桌网',
-            prot: '用户服务协议',
-            btn_msg: '验证码登录'
+            tel: '',
+            icode: ''
         },
         methods: {
             //选择复选框
@@ -26,8 +23,22 @@ require(['vue', 'Zepto'], function (Vue, $) {
             },
             //点击提交
             onSubmit: function () {
-
+                Req.execute('reqICodeLogin', {mobile: this.tel, verificationCode: this.icode}, function(data){
+                    console.log(data);
+                }, function(data){
+                    //todo
+                }, this);
+            },
+            //点击验证码
+            onClickICode: function () {
+                Req.execute('reqICode', {mobile: this.tel},
+                    function(data){
+                        console.log(data);
+                }, function(data){
+                    //todo
+                }, this);
             }
         }
-    })
+    });
+
 });

@@ -116,6 +116,9 @@ input::-webkit-input-placeholder{
 [br-ccc]{
     border: 1px solid #ccc;
 }
+[br-ddd]{
+    border: 1px solid #ddd;
+}
 [br-grey]{
     border: 1px solid #eee;
 }
@@ -173,7 +176,36 @@ input::-webkit-input-placeholder{
     background-repeat: no-repeat;
     background-size: 427px 438px;
 }
-
+/*向左移出*/
+.left-out{
+    will-change: transform;
+    -webkit-transition: -webkit-transform .3s;
+    transition: transform .3s;
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+}
+/*从左进入*/
+.left-in{
+    will-change: transform;
+    -webkit-animation: left-in .3s;
+    animation: left-in .3s;
+}
+@-webkit-keyframes left-in{
+    0%{
+        -webkit-transform: translateX(-100%);
+    },
+    100%{
+        -webkit-transform: translateX(0);
+    }
+}
+@keyframes top-in{
+    0%{
+        transform: translateX(-100%);
+    },
+    100%{
+        transform: translateX(0);
+    }
+}
 /*向上滑出*/
 .top-out{
     will-change: transform;

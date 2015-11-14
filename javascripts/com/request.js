@@ -5,10 +5,14 @@ define(['Zepto'], function ($) {
         //需要对应这几个值
         reqHost: {
             dev: 'http://localhost:8088',
-            prd: ''
+            prd: 'http://linjiameishi.cn'
         },
         //rreqName即请求名，在这里维护
         reqHash: {
+            //获取验证码
+            reqICode: ['GET', 'auth/verificationCode/{mobile}'],
+            //验证码登录
+            reqICodeLogin: ['POST', 'auth/loginByCode'],
             //查询位置
             reqLocation: ['GET', 'unsecure/buildings'],
             //请求菜单
@@ -37,6 +41,7 @@ define(['Zepto'], function ($) {
             $.ajax({
                 type: _self.reqHash[reqName][0],
                 url: reqUrl,
+                contentType: 'application/json;odata=verbose',
                 dataType: 'json',
                 content: self,
                 data: _self.reqHash[reqName][0] == 'POST' ? params : {},
@@ -52,7 +57,8 @@ define(['Zepto'], function ($) {
         },
         /*检测网络环境*/
         getEnvironment: function () {
-            if(location.host.indexOf('localhost') > -1){
+            // return 'prd';
+            if(location.host.indexOf('localhost') > -1 || location.host.indexOf('file') > -1){
                 return 'dev';
             }else{
                 return 'prd';
@@ -61,8 +67,8 @@ define(['Zepto'], function ($) {
         /*获取请求的完整url*/
         getReqURL: function (reqName, params) {
             var url = '';
-            // url = this.reqHost[this.getEnvironment()];
-            url = 'http://localhost:8088';
+            url = this.reqHost[this.getEnvironment()];
+            // url = 'http://localhost:8088';
             //如果找不到配置报错
             if (!this.reqHash[reqName]) {
                 console.error('No url configured found.');

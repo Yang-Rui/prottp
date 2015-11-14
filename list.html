@@ -12,7 +12,7 @@
         <div bg-fff id='j_list' class='list'>
             <searchmenu></searchmenu>
             <p class='nav'>
-                <i class='icon icon-rm'></i>
+                <i @click='clickLMenuBtn' class='icon icon-rm'></i>
                 <span fz-14 v-on:click='onClickAddr'>
                     <i class='icon icon-pos'></i>
                     {{msg_pos}}
@@ -21,8 +21,8 @@
             </p>
             <div class='tab'>
                 <ul>
-                    <li br-grey hr-ora fz-14 clr-grey class='current' v-on:click='chooseTab' data-type='0'>{{msg_tab_left}}</li>
-                    <li br-grey hr-ora fz-14 clr-grey v-on:click='chooseTab' data-type='1'>{{msg_tab_right}}</li>
+                    <li br-grey hr-ora fz-14 clr-grey class='current' v-on:click='chooseTab' data-type='0'>今日预订</li>
+                    <li br-grey hr-ora fz-14 clr-grey v-on:click='chooseTab' data-type='1'>明日预订</li>
                 </ul>
                 <span bg-ora id='j_bar'></span>
             </div>
@@ -70,7 +70,7 @@
                         <img v-bind:src='n.userPhoto'>
                         <p>
                             <span class='t' fz-16>{{n.kitchenName}}<em fz-12 clr-lgrey>{{n.origin}}</em></span>
-                            <span class='r' fz-12 clr="ora" br-org>休息中，可预订明天</span>
+                            <!--<span class='r' fz-12 clr="ora" br-org>休息中，可预订明天</span>-->
                             <span class='s'>
                                 <template v-for='i in 5'>
                                     <i class="icon star on" v-if='i < n.rating'></i>
@@ -84,8 +84,8 @@
             </ul>
 
             <marketbox></marketbox>
-
-            <p class='fbar' id='j_fbar' clr-dgrey br-ccc fz-14 v-on:click='clickbbar'><i class='icon icon-m'></i>&yen{{totalPrice}}（{{totalBnum}}份）<button bg-ora fz-14 class='btn' v-on:click='onSubmit'>{{msg_btn}}</button></p>
+            <leftmenu></leftmenu>
+            <p class='fbar hide' id='j_fbar' clr-dgrey br-ccc fz-14 v-on:click='clickbbar'><i class='icon icon-m'></i>&yen{{totalPrice}}（{{totalBnum}}份）<button bg-ora fz-14 class='btn' v-on:click='onSubmit'>{{msg_btn}}</button></p>
         </div>
         <!--搜索菜单模板-->
         <template id='j_sm_tpl'>
@@ -105,7 +105,7 @@
         <template id='j_m_tpl'>
             <div class='j_market market hide'>
                 <div class='mask'></div>
-                <div class='cont market-bg' clr-dgrey fz-14>
+                <div class='j_cont cont market-bg' clr-dgrey fz-14>
                     <ul>
                         <template v-for='n in plist'>
                             <li class='j_pitem' fz-14 br-ccc data-did={{n.dishId}}>
@@ -122,6 +122,32 @@
                         </template>
                     </ul>
                 </div>
+            </div>
+        </template>
+        <!--左侧菜单模板-->
+        <template id='j_l_tpl'>
+            <div id='j_lmenu' class='lmenu hide' @click='hide'>
+                <div class='mask'></div>
+                <ul id='j_lcont' bg-lgrey>
+                    <li br-ddd fz-14 v-if='userimg && username'>
+                        <img v-bind:src='{{userimg}}'/> {username}}
+                    </li>
+                    <li br-ddd fz-14 v-else>
+                        <i class='icon i-login'></i>登录
+                    </li>
+                    <li br-ddd fz-14>
+                        <i class='icon i-account'></i>我的账户
+                    </li>
+                    <li br-ddd fz-14>
+                        <i class='icon i-order'></i>历史订单
+                    </li>
+                    <li br-ddd fz-14>
+                        <i class='icon i-config'></i>设置
+                    </li>
+                    <li br-ddd fz-14>
+                        <i class='icon i-about'></i>关于我们
+                    </li>
+                </ul>
             </div>
         </template>
     </body>
