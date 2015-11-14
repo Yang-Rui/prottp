@@ -1,5 +1,5 @@
 //做路由切换时需要改为define
-require(['vue', 'Zepto', 'Carousel'], function (Vue, $, Carousel) {
+require(['vue', 'Zepto', 'Carousel','req'], function (Vue, $, Carousel, Req) {
     var Detail = new Vue({
         el: '#j_detail',
         data: {
@@ -32,7 +32,26 @@ require(['vue', 'Zepto', 'Carousel'], function (Vue, $, Carousel) {
             }
         },
         methods: {
+            onshow: function () {
+                var kitchenId = 11,
+                    page = 1;
+                    numberPerPage = 20;
+                Req.execute('reqKitchenInfo', {kitchenId: kitchenId}, function(data){
+                     data.rating = Math.floor(data.rating);
+                    this.kitchen = data;
+                }, function(data){
+                    //todo
+                }, this);
 
+                Req.execute('reqComments', {kitchenId: kitchenId, page: page, numberPerPage: numberPerPage}, function(data){
+                    this.comments.cmts = data && data.list;
+                    //  data.rating = Math.floor(data.rating);
+                    //  console.log(data.rating);
+                    // this.kitchen = data;
+                }, function(data){
+                    //todo
+                }, this);
+            }
         }
     })
 });

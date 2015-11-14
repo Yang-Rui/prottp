@@ -1,3 +1,6 @@
+.booking {
+    padding-bottom: 70px;
+}
 .booking input {
     box-shadow: 0 0 0 1px #ddd;
     padding: 5px;
@@ -20,17 +23,21 @@
     margin: 6px 2px 0 2%;
 }
 
-.booking-cart-list {
+.booking-cart-list,
+.booking-paymethod-list {
     border-bottom: 1px solid #ddd;
 }
-.booking-cart-list {
+.booking-cart-list,
+.booking-paymethod-list {
     border: none;
 }
-.booking-cart-list > li {
+.booking-cart-list > li,
+.booking-paymethod-list > li {
     padding: 8px 0;
     border-bottom: 1px solid #ccc;
 }
-.booking-cart-list > li:last-child {
+.booking-cart-list > li:last-child,
+.booking-paymethod-list > li:last-child {
     border: none;
 }
 .booking-cart-pic {
@@ -39,14 +46,39 @@
 }
 .booking-goods-info {
     overflow: hidden;
+    padding-left: 10px;
 }
 .booking-cash-info {
     border-top: 1px solid #aaa;
     border-bottom: 1px solid #aaa;
     padding: 8px 0;
 }
+.booking-paymethod-list li > i {
+    display: block;
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    border-radius: 50%;
+    -webkit-transform: translateY(50%);
+    -ms-transform: translateY(50%);
+    -o-transform: translateY(50%);
+    transform: translateY(50%);
+    box-shadow: 0 0 0 3px #fff, 0 0 0 4px #ccc;
+}
+.booking-paymethod-list li > i.active {
+    background-color: #ff5422;
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #ff5422;
+}
 .booking-total {
     padding: 6px 0;
+}
+.booking-btn {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(255,255,255,0.8);
+    padding: 10px;
+    box-sizing: border-box;
 }
 .icon-person {
     width: 20px;

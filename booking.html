@@ -15,7 +15,7 @@
                 <div class="booking-info clearfix"><i class="icon icon-tel booking-info-icon" fl></i><input placeholder="请输入您的手机"fr/></div>
                 <div class="booking-info clearfix" style="line-height: 35px;"><i class="icon icon-loc booking-info-icon" fl></i>光大会展中心<input style="width: 60%" placeholder="请输入办公室/房间号"fr/></div>
             </section>
-            <section class="ljms-blc">
+            <section class="booking-detail ljms-blc">
                 <div class="ljms-blc-title">订单详情<span fr clr="ora">今天中午11:45-12:00</span></div>
                 <ul class="booking-cart-list">
                     <li class="clearfix">
@@ -51,6 +51,15 @@
                 <div class="booking-total">
                     <span fz=14>需支付</span><span fr fz=14>¥66</span>
                 </div>
+            </section>
+            <section class="booking-paymethod ljms-blc">
+                <ul class="booking-paymethod-list">
+                    <li>微信支付<i class="active" fr></i></li>
+                    <li>支付宝支付 <i fr></i></li>
+                </ul>
+            </section>
+            <section class="booking-btn">
+                <button bg-ora="" class="btn" v-on:click="placeorder">确认下单</button>
             </section>
         </div>
     </body>

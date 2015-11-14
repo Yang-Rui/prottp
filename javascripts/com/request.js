@@ -14,7 +14,11 @@ define(['Zepto'], function ($) {
             //请求菜单
             reqMenu: ['GET', 'unsecure/menu/{buildingId}/{date}'],
             //厨房信息
-            kitchenInfo: ['GET', 'unsecure/kitchen/{kitchenId}']
+            reqKitchenInfo: ['GET', 'unsecure/kitchen/{kitchenId}'],
+            //厨房评论
+            reqComments: ['GET', 'unsecure/kitchen/{kitchenId}/commentList'],
+            //微信支付
+            wxPayNotify: ['POST', 'unsecure/weixin/pay/notify']
         },
         /*
             发送网络请求
@@ -72,7 +76,7 @@ define(['Zepto'], function ($) {
                     if (url.indexOf('{' + key + '}') > -1) {
                         url = url.replace('{' + key + '}', params[key]);
                     } else {
-                        url += ((url.indexOf('?') ? '?' : '&') + key + '=' + params[key]);
+                        url += ((url.indexOf('?') > -1 ? '&' : '?') + key + '=' + params[key]);
                     }
                 }
             }

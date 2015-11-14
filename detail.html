@@ -3,15 +3,6 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,minimal-ui">
-        <script type="text/javascript">
-            if (typeof Object.create !== "function") {
-                Object.create = function (obj) {
-                    function F() {}
-                    F.prototype = obj;
-                    return new F();
-                };
-            }
-        </script>
         <link rel="stylesheet" href="./stylesheets/common.css">
         <link rel="stylesheet" href="./stylesheets/detail.css">
         <link rel="stylesheet" href="./stylesheets/owl.carousel.css">
@@ -25,8 +16,8 @@
                 <img class="item" src="cccc"/>
                 <img class="item" src="cccc"/>
             </section>
-            <section class="kitchen-detail ljms-blc">
-                <img class="kitchen-avatar avatar" src="{{kitchen.userPhoto}}" fl />
+            <section class="kitchen-detail ljms-blc" v-on:click="onshow">
+                <img class="kitchen-avatar avatar" v-bind:src="kitchen.userPhoto" fl />
                 <div class="kitchen-desc">
                     <div class="kitchen-brief">
                         <p><span fz=16>{{kitchen.displayName}}</span><span class="tip">{{kitchen.origin}}</span></p>
@@ -44,7 +35,7 @@
                 <div class="ljms-blc-title">{{kitchen.comments}}评论</div>
                 <ul class="comment-list">
                     <li v-for="cmt in comments.cmts">
-                        <img class="avatar" src="{{cmt.userPhoto}}" fl/>
+                        <img class="avatar" v-bind:src="cmt.userPhoto" fl/>
                         <div class="comment-desc">
                             <p><span class="comment-user" fz=16>{{cmt.userName}}</span></p>
                             <p>

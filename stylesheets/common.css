@@ -150,6 +150,13 @@ input::-webkit-input-placeholder{
 .hide{
     display: none !important;
 }
+.btn{
+    width: 100%;
+    padding: 10px 0;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 3px;
+}
 .btn:active{
     will-change: -webkit-filter;
     -webkit-filter: hue-rotate(-30deg);
