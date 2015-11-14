@@ -12,9 +12,12 @@
     </head>
     <body>
         <div id='j_detail' class='detail'>
-            <section class="detail-carousel">
-                <img class="item" src="cccc"/>
-                <img class="item" src="cccc"/>
+            <section id="detail-carousel" class="detail-carousel">
+                <div class="carousel-wrapper clearfix" v-bind:style="style.carousel.wrapper">
+                    <div v-bind:style="style.carousel.allwidth">
+                        <div v-for="photo in kitchen.photos" class="item"><img v-bind:src="photo" v-bind:style="style.carousel.img"/></div>
+                    </div>
+                </div>
             </section>
             <section class="kitchen-detail ljms-blc" v-on:click="onshow">
                 <img class="kitchen-avatar avatar" v-bind:src="kitchen.userPhoto" fl />

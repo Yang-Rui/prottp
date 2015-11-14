@@ -145,6 +145,9 @@ input::-webkit-input-placeholder{
 [fz="16"]{
     font-size: 16px;
 }
+[mgr="4"] {
+    margin-right: 4px;
+}
 
 /*定义基本class*/
 .hide{
@@ -239,7 +242,7 @@ input::-webkit-input-placeholder{
     background-color: #fff;
     box-shadow: 0 1px 1px 0 #dadada;
     margin-bottom: 16px;
-    padding: 6px 8px 0 8px;
+    padding: 6px 8px;
 }
 .ljms-blc-title {
     margin: 0 -6px;
@@ -254,7 +257,7 @@ input::-webkit-input-placeholder{
     width: 45px;
     height: 45px;
     display: inline-block;
-    border: 50%;
+    border-radius: 50%;
 }
 
 .mask{

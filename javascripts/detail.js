@@ -7,7 +7,6 @@ require(['vue', 'Zepto', 'Carousel','req'], function (Vue, $, Carousel, Req) {
                 displayName: '抓一小处',
                 origin: '四川成都',
                 photos: [
-                    'a','b','c','d'
                 ],
                 sales: 4,
                 rating: 4,
@@ -29,6 +28,19 @@ require(['vue', 'Zepto', 'Carousel','req'], function (Vue, $, Carousel, Req) {
                     content: '很好很好很好很好很好很好 很好',
                     createTime: '2015/11/06 12:33:00'
                 }]
+            },
+            style: {
+                carousel: {
+                    img: {
+                        width: '0px'
+                    },
+                    allwidth: {
+                        width: '0px'
+                    },
+                    wrapper: {
+                        width: '0px'
+                    },
+                }
             }
         },
         methods: {
@@ -38,7 +50,12 @@ require(['vue', 'Zepto', 'Carousel','req'], function (Vue, $, Carousel, Req) {
                     numberPerPage = 20;
                 Req.execute('reqKitchenInfo', {kitchenId: kitchenId}, function(data){
                      data.rating = Math.floor(data.rating);
+                     for(i in data.photos) {
+                         data.photos[i] = 'http://localhost:8088' + data.photos[i];
+                     }
+                     data.userPhoto = 'http://localhost:8088' + data.userPhoto;
                     this.kitchen = data;
+                    this._carousel(5);
                 }, function(data){
                     //todo
                 }, this);
@@ -51,7 +68,14 @@ require(['vue', 'Zepto', 'Carousel','req'], function (Vue, $, Carousel, Req) {
                 }, function(data){
                     //todo
                 }, this);
+            },
+            _carousel: function (pNum) {
+                var dWidth = $(document).width();
+                this.style.carousel.img.width = dWidth + 'px';
+                this.style.carousel.allwidth.width = dWidth*pNum + 'px';
+                this.style.carousel.wrapper.width = dWidth*(pNum-1 < 0 ? 0 : pNum-1) + 'px';
+                // this.style.carousel.wrapper.animation = "ljms-carousel 30s ease-in-out 0s infinate alternate";
             }
         }
-    })
+    });
 });
