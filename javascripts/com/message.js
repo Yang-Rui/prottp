@@ -1,27 +1,31 @@
 define([''], function () {
     /**
-    * @descrption: loading组件
+    * @descrption: message组件,用于各种弹窗消息
     * @version: 1.0.0
     * @author: mfoonirlee
     */
-    var Loading = {
-        //全屏loading的单体实例
+    var Message = {
+        //全屏Message的单体实例
         _instance: null,
         /*
-        * @descrption: 显示一个全屏的loading
-        * @param: msg{string} 默认为加载中...
-        * @param: timeout{string} 默认不会隐藏
+        * @descrption: 显示一个全屏的Message
+        * @param: msg{string} 没有则不会弹窗
+        * @param: timeout{string} 默认2s隐藏
         */
-        showLoading: function(msg, timeout){
-            msg = msg || '加载中...';
+        showMessage: function(msg, timeout){
+            if(!msg){
+                throw new Error('弹出消息失败,请传入需要弹出的消息')
+                return;
+            }
             var d = document.createElement('div');
             d.className = 'mask';
             d.style.zIndex = '1000';
-            d.innerHTML = "<div class='center'><p class='loading'></p><p class='loading-word' fz-14>" + msg + "</p></div>";
+            d.innerHTML = "<div class='center center-msg'><p class='message-word top-in opacity' fz-14>" + msg + "</p></div>";
             document.body.appendChild(d);
             document.body.style.overflow = 'hidden';
             this._instance = d;
 
+            timeout = timeout || 2000;
             if(timeout){
                 setTimeout(function(){
                     document.body.removeChild(d);
@@ -30,19 +34,14 @@ define([''], function () {
             }
         },
         /*
-        * @descrption: 隐藏全屏的loading
+        * @descrption: 隐藏全屏的Message
         */
-        hideLoading: function(){
+        hideMessage: function(){
             if(this._instance){
                 document.body.removeChild(this._instance);
                 document.body.style.overflow = 'auto';
             }
         }
-        /**
-        * @descrption: 显示一个局部的loading
-        * @param: container{documentElement} 必传项 将loading加入某个容器
-        * @param: msg{string} 默认为加载中...
-        */
     };
-    return Loading;
+    return Message;
 });

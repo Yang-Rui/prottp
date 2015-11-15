@@ -362,8 +362,8 @@
 }
 .lmenu ul li i.icon{
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 14px;
+    height: 14px;
     position: absolute;
     top: 19px;
     left: 10px;
@@ -378,7 +378,7 @@
     background-position: -39px -15px;
 }
 .i-config{
-    background-position: -65px -15px;
+    background-position: -64px -15px;
 }
 .i-about{
     background-position: -88px -15px;

@@ -41,7 +41,7 @@ define(['Zepto'], function ($) {
             $.ajax({
                 type: _self.reqHash[reqName][0],
                 url: reqUrl,
-                contentType: 'application/json;odata=verbose',
+                contentType: 'application/json',
                 dataType: 'json',
                 content: self,
                 data: _self.reqHash[reqName][0] == 'POST' ? params : {},
@@ -57,7 +57,7 @@ define(['Zepto'], function ($) {
         },
         /*检测网络环境*/
         getEnvironment: function () {
-            // return 'prd';
+            return 'prd';
             if(location.host.indexOf('localhost') > -1 || location.host.indexOf('file') > -1){
                 return 'dev';
             }else{

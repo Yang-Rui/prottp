@@ -1,5 +1,5 @@
 //做路由切换时需要改为define
-define(['vue', 'Zepto', 'req'], function (Vue, $, Req) {
+define(['vue', 'Zepto', 'req', 'message'], function (Vue, $, Req, Msg) {
 
     var Index = new Vue({
         el: '#j_index',
@@ -23,6 +23,18 @@ define(['vue', 'Zepto', 'req'], function (Vue, $, Req) {
             },
             //点击提交
             onSubmit: function () {
+                if(!this.tel){
+                    Msg.showMessage('请输入手机号');
+                    return;
+                }
+                if(!/^1[345678][\d]{9}$/g.test(this.tel)){
+                    Msg.showMessage('请输入正确的手机号');
+                    return;
+                }
+                if(!this.icode){
+                    Msg.showMessage('请输入验证码');
+                    return;
+                }
                 Req.execute('reqICodeLogin', {mobile: this.tel, verificationCode: this.icode}, function(data){
                     console.log(data);
                 }, function(data){

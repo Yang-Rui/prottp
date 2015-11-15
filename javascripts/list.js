@@ -1,5 +1,5 @@
 //做路由切换时需要改为define
-require(['vue', 'Zepto', 'req', 'loading'], function (Vue, $, Req, Loading) {
+require(['vue', 'Zepto', 'req', 'loading', 'message', 'wx'], function (Vue, $, Req, Loading, Msg, wx) {
 
     var CONST_BUTTON_MSG = '去结算';
     var CONST_ANIMATE_TIMEOUT = 300;
@@ -176,7 +176,7 @@ require(['vue', 'Zepto', 'req', 'loading'], function (Vue, $, Req, Loading) {
     var List = new Vue({
         el: '#j_list',
         data: {
-            msg_pos: '光大会展中心',
+            msg_pos: '请输入地址',
             msg_btn: '去结算',
             plist: [],
             //总预定数
@@ -251,7 +251,11 @@ require(['vue', 'Zepto', 'req', 'loading'], function (Vue, $, Req, Loading) {
                 //阻止事件冒泡
                 e.preventDefault();
                 e.stopPropagation();
-                window.localStorage.setItem('plist', this.plist);
+
+                if(this.totalPrice == 0 || this.totalBnum == 0){
+                    Msg.showMessage('请先选择菜品');
+                    return;
+                }
                 //先使用这种多页应用的写法
                 location.href = 'detail.html';
             },
@@ -288,6 +292,7 @@ require(['vue', 'Zepto', 'req', 'loading'], function (Vue, $, Req, Loading) {
                         this.plist = data;
                         this.$emit('showBottomBar');
                     }else{
+                        Msg.showMessage('没有搜索到任何菜品');
                         this.plist = [];
                     }
                 }, function(data){

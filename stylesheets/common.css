@@ -176,6 +176,28 @@ input::-webkit-input-placeholder{
     background-repeat: no-repeat;
     background-size: 427px 438px;
 }
+/*渐显动画*/
+.opacity{
+    will-change: opacity;
+    -webkit-animation: left-in .3s;
+    animation: left-in .3s;
+}
+@-webkit-keyframes opacity{
+    0%{
+        opacity: 0;
+    },
+    100%{
+        opacity: 1;
+    }
+}
+@keyframes opacity{
+    0%{
+        opacity: 0;
+    },
+    100%{
+        opacity: 1;
+    }
+}
 /*向左移出*/
 .left-out{
     will-change: transform;
@@ -198,7 +220,7 @@ input::-webkit-input-placeholder{
         -webkit-transform: translateX(0);
     }
 }
-@keyframes top-in{
+@keyframes left-in{
     0%{
         transform: translateX(-100%);
     },
@@ -310,6 +332,9 @@ input::-webkit-input-placeholder{
     -webkit-transform: translateY(-50%) translateX(-50%);
     transform: translateY(-50%) translateX(-50%);
 }
+.center-msg{
+    width: 100%;
+}
 .loading:before{
     width: 50%;
     height: 50%;
@@ -356,20 +381,30 @@ input::-webkit-input-placeholder{
 @-webkit-keyframes load3 {
     0% {
         -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
     }
     100% {
         -webkit-transform: rotate(360deg);
-        transform: rotate(360deg);
     }
 }
 @keyframes load3 {
     0% {
-        -webkit-transform: rotate(0deg);
         transform: rotate(0deg);
     }
     100% {
-        -webkit-transform: rotate(360deg);
         transform: rotate(360deg);
     }
+}
+.message-word{
+    position: absolute;
+    width: 60%;
+    left: 20%;
+    top: 100%;
+    color: #fff;
+    text-align: center;
+    word-break: break-all;
+    font-weight: 700;
+    background-color: rgba(0,0,0,.6);
+    padding: 10px 15px;
+    border-radius: 5px;
+    box-sizing: border-box;
 }

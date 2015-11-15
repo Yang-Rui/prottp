@@ -5,7 +5,9 @@ var require = {
             Zepto: './lib/zepto.min',
             //helper
             req: './com/request',
-            loading: './com/loading'
+            loading: './com/loading',
+            message: './com/message',
+            wx: './lib/wx-1.0.0'
         },
         shim: {
         }
