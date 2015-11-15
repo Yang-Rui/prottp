@@ -13,6 +13,8 @@ define(['Zepto'], function ($) {
             reqICode: ['GET', 'auth/verificationCode/{mobile}'],
             //验证码登录
             reqICodeLogin: ['POST', 'auth/loginByCode'],
+            //获取我的信息
+            reqMyInfo: ['GET', 'api/user/me'],
             //查询位置
             reqLocation: ['GET', 'unsecure/buildings'],
             //请求菜单
@@ -30,7 +32,7 @@ define(['Zepto'], function ($) {
             @success function
             @error function
         */
-        execute: function (reqName, params, success, error, scope) {
+        execute: function (reqName, params, success, error, scope, headers) {
             var _self = this,
                 reqUrl = this.getReqURL(reqName, params);
 
@@ -41,7 +43,8 @@ define(['Zepto'], function ($) {
             $.ajax({
                 type: _self.reqHash[reqName][0],
                 url: reqUrl,
-                contentType: 'application/json',
+                headers: headers || '',
+                contentType: 'application/json;charset=utf-8',
                 dataType: 'json',
                 content: self,
                 data: _self.reqHash[reqName][0] == 'POST' ? params : {},
@@ -50,6 +53,8 @@ define(['Zepto'], function ($) {
                     success && typeof success == 'function' && success.call(scope, data);
                 },
                 error: function (data) {
+                    //错误状态下返回的是整个xmlhttpreq,需要手动提取response
+                    data = data && data.response && JSON.parse(data.response);
                     console.log(reqName + '请求失败');
                     error && typeof error == 'function' && error.call(scope, data);
                 },
@@ -57,7 +62,7 @@ define(['Zepto'], function ($) {
         },
         /*检测网络环境*/
         getEnvironment: function () {
-            return 'prd';
+            // return 'prd';
             if(location.host.indexOf('localhost') > -1 || location.host.indexOf('file') > -1){
                 return 'dev';
             }else{

@@ -1,11 +1,11 @@
 //做路由切换时需要改为define
-define(['vue', 'Zepto', 'req', 'message'], function (Vue, $, Req, Msg) {
+define(['vue', 'Zepto', 'req', 'message', 'loading'], function (Vue, $, Req, Msg, Loading) {
 
     var Index = new Vue({
         el: '#j_index',
         data: {
-            tel: '',
-            icode: ''
+            tel: '18521058006',
+            icode: '682583'
         },
         methods: {
             //选择复选框
@@ -35,18 +35,44 @@ define(['vue', 'Zepto', 'req', 'message'], function (Vue, $, Req, Msg) {
                     Msg.showMessage('请输入验证码');
                     return;
                 }
-                Req.execute('reqICodeLogin', {mobile: this.tel, verificationCode: this.icode}, function(data){
-                    console.log(data);
+                Loading.showLoading();
+                Req.execute('reqICodeLogin', JSON.stringify({mobile: this.tel, verificationCode: this.icode}), function(data){
+                    Loading.hideLoading();
+                    if(data.message){
+                        Msg.showMessage(data.message);
+                        return;
+                    }
+                    this.requestUesrInfo(data.token);
                 }, function(data){
-                    //todo
+                    Loading.hideLoading();
+                    if(data.message){
+                        Msg.showMessage(data.message);
+                    }else{
+                        Msg.showMessage('网络开小差了,请重试');
+                    }
                 }, this);
+            },
+            //请求用户信息
+            requestUesrInfo: function(token){
+                Loading.showLoading();
+                Req.execute('reqMyInfo', '', function(data){
+                    Loading.hideLoading();
+                    console.log(data);
+                }, function (){
+                    Loading.hideLoading();
+                    Msg.showMessage('网络开小差了,请重试');
+                }, this, 'Authorization:Bearer ' + token);
             },
             //点击验证码
             onClickICode: function () {
+                Loading.showLoading();
                 Req.execute('reqICode', {mobile: this.tel},
                     function(data){
+                        Loading.hideLoading();
+                        Msg.showMessage('验证码发送成功!');
                         console.log(data);
                 }, function(data){
+                    Loading.hideLoading();
                     //todo
                 }, this);
             }
