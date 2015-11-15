@@ -1,12 +1,11 @@
 //做路由切换时需要改为define
-require(['vue', 'Zepto','req'], function (Vue, $, Req) {
+require(['vue', 'Zepto','req', 'Store'], function (Vue, $, Req, Store) {
     var Index = new Vue({
         el: '#j_booking',
         data: {
         },
         methods: {
             placeorder: function () {
-                alert(1);
                 Req.execute('wxPayNotify', null, function(data){
                     var $this = $(this.$el);
                     if(data.length > 0){

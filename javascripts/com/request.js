@@ -1,4 +1,4 @@
-define(['Zepto'], function ($) {
+define(['Zepto', 'Store'], function ($, Store) {
 
     //定义所有的请求链接
     var req = {
@@ -23,8 +23,8 @@ define(['Zepto'], function ($) {
             reqKitchenInfo: ['GET', 'unsecure/kitchen/{kitchenId}'],
             //厨房评论
             reqComments: ['GET', 'unsecure/kitchen/{kitchenId}/commentList'],
-            //微信支付
-            wxPayNotify: ['POST', 'unsecure/weixin/pay/notify']
+            //生成订单
+            placeOrder: ['POST', 'api/order/new']
         },
         /*
             发送网络请求
@@ -48,6 +48,9 @@ define(['Zepto'], function ($) {
                 dataType: 'json',
                 content: self,
                 data: _self.reqHash[reqName][0] == 'POST' ? params : {},
+                beforeSend: function (request) {
+                    // Store.get('token') && request.setRequestHeader('token', Store.get('token'));
+                },
                 success: function (data) {
                     console.log(reqName + '请求成功');
                     success && typeof success == 'function' && success.call(scope, data);
@@ -72,8 +75,8 @@ define(['Zepto'], function ($) {
         /*获取请求的完整url*/
         getReqURL: function (reqName, params) {
             var url = '';
-            url = this.reqHost[this.getEnvironment()];
-            // url = 'http://localhost:8088';
+            // url = this.reqHost[this.getEnvironment()];
+            url = 'http://localhost:8088';
             //如果找不到配置报错
             if (!this.reqHash[reqName]) {
                 console.error('No url configured found.');
