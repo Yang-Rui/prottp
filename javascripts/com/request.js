@@ -49,7 +49,7 @@ define(['Zepto', 'Store'], function ($, Store) {
                 content: self,
                 data: _self.reqHash[reqName][0] == 'POST' ? params : {},
                 beforeSend: function (request) {
-                    // Store.get('token') && request.setRequestHeader('token', Store.get('token'));
+                    // Store.get('token') && request.setRequestHeader('Authorization', Store.get('token'));
                 },
                 success: function (data) {
                     console.log(reqName + '请求成功');
