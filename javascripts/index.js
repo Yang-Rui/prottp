@@ -1,11 +1,11 @@
 //做路由切换时需要改为define
-define(['vue', 'Zepto', 'req', 'message', 'loading'], function (Vue, $, Req, Msg, Loading) {
+define(['vue', 'Zepto', 'req', 'message', 'loading', 'Store'], function (Vue, $, Req, Msg, Loading, Store) {
 
     var Index = new Vue({
         el: '#j_index',
         data: {
-            tel: '18521058006',
-            icode: '682583'
+            tel: '13452468794',
+            icode: '535369'
         },
         methods: {
             //选择复选框
@@ -42,6 +42,7 @@ define(['vue', 'Zepto', 'req', 'message', 'loading'], function (Vue, $, Req, Msg
                         Msg.showMessage(data.message);
                         return;
                     }
+                    Store.set('token', 'Bearer ' + data.token);
                     this.requestUesrInfo(data.token);
                 }, function(data){
                     Loading.hideLoading();
@@ -57,11 +58,12 @@ define(['vue', 'Zepto', 'req', 'message', 'loading'], function (Vue, $, Req, Msg
                 Loading.showLoading();
                 Req.execute('reqMyInfo', '', function(data){
                     Loading.hideLoading();
-                    console.log(data);
+                    Store.set('UserInfo', data);
+                    location.href = 'list.html';
                 }, function (){
                     Loading.hideLoading();
                     Msg.showMessage('网络开小差了,请重试');
-                }, this, 'Authorization:Bearer ' + token);
+                }, this);
             },
             //点击验证码
             onClickICode: function () {
@@ -73,7 +75,7 @@ define(['vue', 'Zepto', 'req', 'message', 'loading'], function (Vue, $, Req, Msg
                         console.log(data);
                 }, function(data){
                     Loading.hideLoading();
-                    //todo
+                    Msg.showMessage('网络开小差了,请重试');
                 }, this);
             }
         }

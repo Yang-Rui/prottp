@@ -28,7 +28,7 @@
             </div>
 
             <!-- <ul class='hide'></ul> -->
-            <ul id='j_ilist' class='ilist' bg-lgrey >
+            <ul id='j_ilist' class='ilist hide' bg-lgrey >
                 <li class='j_pitem' bg-fff br-grey v-for="n in plist" data-did={{n.dishId}}>
                     <div @click='showMsg' class='imgd j_dish'>
                         <img v-bind:src="n.photo">

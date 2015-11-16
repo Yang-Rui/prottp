@@ -7,7 +7,7 @@ var require = {
             req: './com/request',
             loading: './com/loading',
             message: './com/message',
-            wx: './lib/wx-1.0.0'
+            wx: './lib/wx-1.0.0',
             Store: './helper/store'
         },
         shim: {

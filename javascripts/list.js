@@ -1,5 +1,5 @@
 //做路由切换时需要改为define
-require(['vue', 'Zepto', 'req', 'loading', 'message', 'wx'], function (Vue, $, Req, Loading, Msg, wx) {
+require(['vue', 'Zepto', 'req', 'loading', 'message', 'Store'], function (Vue, $, Req, Loading, Msg, Store) {
 
     var CONST_BUTTON_MSG = '去结算';
     var CONST_ANIMATE_TIMEOUT = 300;
@@ -18,8 +18,13 @@ require(['vue', 'Zepto', 'req', 'loading', 'message', 'wx'], function (Vue, $, R
         timer: '',
         events:{
             'searchMenuInit': function(msg){
-                this.input_val = msg;
-                this.requestAddr(msg);
+                //当默认文字和传入的文字不相同时，才发送msg请求
+                if(this.msg_placeholder != msg){
+                    this.input_val = msg;
+                    this.requestAddr(msg);
+                }else{
+                    this.requestAddr('');
+                }
             }
         },
         damp: false,
@@ -256,6 +261,7 @@ require(['vue', 'Zepto', 'req', 'loading', 'message', 'wx'], function (Vue, $, R
                     Msg.showMessage('请先选择菜品');
                     return;
                 }
+                Store.set('list', this.plist);
                 //先使用这种多页应用的写法
                 location.href = 'detail.html';
             },
@@ -290,6 +296,7 @@ require(['vue', 'Zepto', 'req', 'loading', 'message', 'wx'], function (Vue, $, R
                             data[i].bnum = 0;
                         }
                         this.plist = data;
+                        $(this.$el).find('#j_ilist').removeClass('hide');
                         this.$emit('showBottomBar');
                     }else{
                         Msg.showMessage('没有搜索到任何菜品');

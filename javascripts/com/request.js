@@ -32,7 +32,7 @@ define(['Zepto', 'Store'], function ($, Store) {
             @success function
             @error function
         */
-        execute: function (reqName, params, success, error, scope, headers) {
+        execute: function (reqName, params, success, error, scope) {
             var _self = this,
                 reqUrl = this.getReqURL(reqName, params);
 
@@ -43,13 +43,12 @@ define(['Zepto', 'Store'], function ($, Store) {
             $.ajax({
                 type: _self.reqHash[reqName][0],
                 url: reqUrl,
-                headers: headers || '',
                 contentType: 'application/json;charset=utf-8',
                 dataType: 'json',
                 content: self,
                 data: _self.reqHash[reqName][0] == 'POST' ? params : {},
                 beforeSend: function (request) {
-                    // Store.get('token') && request.setRequestHeader('Authorization', Store.get('token'));
+                    Store.get('token') && request.setRequestHeader('Authorization', Store.get('token'));
                 },
                 success: function (data) {
                     console.log(reqName + '请求成功');
@@ -75,8 +74,8 @@ define(['Zepto', 'Store'], function ($, Store) {
         /*获取请求的完整url*/
         getReqURL: function (reqName, params) {
             var url = '';
-            // url = this.reqHost[this.getEnvironment()];
-            url = 'http://localhost:8088';
+            url = this.reqHost[this.getEnvironment()];
+            // url = 'http://localhost:8088';
             //如果找不到配置报错
             if (!this.reqHash[reqName]) {
                 console.error('No url configured found.');
