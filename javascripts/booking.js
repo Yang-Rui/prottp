@@ -1,33 +1,73 @@
 //做路由切换时需要改为define
 require(['vue', 'Zepto','req', 'Store'], function (Vue, $, Req, Store) {
-    var Index = new Vue({
+    var Booking = new Vue({
         el: '#j_booking',
         data: {
         },
         created: function () {
             this.addr = Store.get('addr');
-            console.log(this.addr);
+            this.userInfo = Store.get('userInfo');
+            this.booking = {
+                date: '2015-11-18',
+                buildingId: this.addr.domainId,
+                roomNumber: '',
+                contact: this.userInfo.displayName,
+                mobile: this.userInfo.mobile,
+                orderDishes: this.getCart()
+            }
+            this.getCoupon();
         },
         methods: {
-            placeorder: function () {
-                Req.execute('wxPayNotify', null, function(data){
-                    var $this = $(this.$el);
-                    if(data.length > 0){
-                        //双向绑定数据
-                        this.llist = data;
-                        $this.find('#j_llist').removeClass('hide');
-                        this.nolocation_msg = '';
-                        $this.find('#j_warns').addClass('hide');
-                    }else{
-                        this.llist = [];
-                        $this.find('#j_llist').addClass('hide');
-                        this.nolocation_msg = CONST_NO_LOCATION_MSG;
-                        $this.find('#j_warns').removeClass('hide');
+            getCart: function () {
+                var list = Store.get('list'),
+                    cart = [];
+                    if (list && list.length > 0) {
+                        for (var i in list) {
+                            if (list[i].bnum > 0) {
+                                var item = {};
+                                item.dishId = list[i].dishId;
+                                item.displayName = list[i].displayName;
+                                item.photo = list[i].photo;
+                                item.kitchenName = list[i].kitchenName;
+                                item.price = list[i].price;
+                                item.number = list[i].bnum;
+                                cart.push(item);
+                            }
+                        }
                     }
+                    return this.cart = cart;
+            },
+            placeorder: function () {
+                Loading.showLoading();
+                Req.execute('placeOrder', this.booking, function(data){
+                    Loading.hideLoading();
+                    console.log('OK');
                 }, function(data){
-                    //todo
+                    console.log('FAIL');
                 }, this);
+            },
+            getCoupon: function () {
+                this.couponPrice = 0;
+            }
+        },
+        computed: {
+            totalprice: {
+                get: function () {
+                    var tprice = 0;
+                    for (var i in this.cart) {
+                        tprice += this.cart[i].price * this.cart[i].number;
+                    }
+                    return tprice;
+                }
+            },
+            payprice: {
+                get: function () {
+                    return this.totalprice - this.couponPrice;
+                }
             }
         }
-    })
+    });
+    Booking.$watch('totalprice', function (val) {
+      this.fullName = this.firstName + ' ' + val
+    });
 });
