@@ -199,6 +199,7 @@ require(['vue', 'Zepto', 'req', 'loading', 'message', 'Store'], function (Vue, $
                 //更改title的值
                 this.msg_pos = lObj.name;
                 this.locationId = lObj.id;
+                Store.set('addr', lObj);
                 this.requestPList();
             },
             //更新价格和预订数
