@@ -4,6 +4,10 @@ require(['vue', 'Zepto','req', 'Store'], function (Vue, $, Req, Store) {
         el: '#j_booking',
         data: {
         },
+        created: function () {
+            this.addr = Store.get('addr');
+            console.log(this.addr);
+        },
         methods: {
             placeorder: function () {
                 Req.execute('wxPayNotify', null, function(data){

@@ -46,7 +46,7 @@ define(['Zepto', 'Store'], function ($, Store) {
                 contentType: 'application/json;charset=utf-8',
                 dataType: 'json',
                 content: self,
-                data: _self.reqHash[reqName][0] == 'POST' ? params : {},
+                data: _self.reqHash[reqName][0] == 'POST' ? JSON.stringify(params) : null,
                 beforeSend: function (request) {
                     Store.get('token') && request.setRequestHeader('Authorization', Store.get('token'));
                 },

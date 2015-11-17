@@ -36,7 +36,7 @@ define(['vue', 'Zepto', 'req', 'message', 'loading', 'Store'], function (Vue, $,
                     return;
                 }
                 Loading.showLoading();
-                Req.execute('reqICodeLogin', JSON.stringify({mobile: this.tel, verificationCode: this.icode}), function(data){
+                Req.execute('reqICodeLogin', {mobile: this.tel, verificationCode: this.icode}, function(data){
                     Loading.hideLoading();
                     if(data.message){
                         Msg.showMessage(data.message);
@@ -58,7 +58,7 @@ define(['vue', 'Zepto', 'req', 'message', 'loading', 'Store'], function (Vue, $,
                 Loading.showLoading();
                 Req.execute('reqMyInfo', '', function(data){
                     Loading.hideLoading();
-                    Store.set('UserInfo', data);
+                    Store.set('userInfo', data);
                     location.href = 'list.html';
                 }, function (){
                     Loading.hideLoading();

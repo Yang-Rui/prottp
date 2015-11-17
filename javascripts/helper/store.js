@@ -11,7 +11,7 @@ define([], function () {
         get: function (key) {
             var value = localStorage.getItem(key);
             try {
-                if (/\{\"\w+\"\:\"\w+\"\}/.test(value)) {
+                if (/\{\"\w+\"\:/.test(value)) {
                     value = JSON.parse(value);
                 }
             } catch (e) {
