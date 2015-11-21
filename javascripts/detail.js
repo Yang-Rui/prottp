@@ -45,10 +45,6 @@ require(['vue', 'Zepto','req', 'loading'], function (Vue, $, Req, Loading) {
                 Req.execute('reqKitchenInfo', {kitchenId: kitchenId}, function(data){
                     Loading.hideLoading();
                      data.rating = Math.floor(data.rating);
-                     for(i in data.photos) {
-                         data.photos[i] = 'http://localhost:8088' + data.photos[i];
-                     }
-                     data.userPhoto = 'http://localhost:8088' + data.userPhoto;
                     this.kitchen = data;
                     this._carousel(5);
                 }, function(data){

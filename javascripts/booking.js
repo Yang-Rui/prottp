@@ -79,7 +79,4 @@ require(['vue', 'Zepto','req', 'loading', 'Store', 'message'], function (Vue, $,
             }
         }
     });
-    Booking.$watch('totalprice', function (val) {
-      this.fullName = this.firstName + ' ' + val
-    });
 });
