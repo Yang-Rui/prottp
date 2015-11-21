@@ -29,6 +29,9 @@ button{
 li{
     list-style: none;
 }
+li[disabled] {
+    opacity: 0.3;
+}
 input::-webkit-input-placeholder{
     color: #ccc;
 }

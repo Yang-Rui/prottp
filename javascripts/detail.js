@@ -73,8 +73,4 @@ require(['vue', 'Zepto','req', 'loading'], function (Vue, $, Req, Loading) {
             }
         }
     });
-
-    $(function () {
-
-    });
 });

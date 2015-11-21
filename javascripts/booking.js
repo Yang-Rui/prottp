@@ -1,24 +1,30 @@
 //做路由切换时需要改为define
-require(['vue', 'Zepto','req', 'Store'], function (Vue, $, Req, Store) {
+require(['vue', 'Zepto','req', 'loading', 'Store', 'message'], function (Vue, $, Req, Loading, Store, Msg) {
     var Booking = new Vue({
         el: '#j_booking',
         data: {
+            booking: {
+                roomNumber: '',
+                contact: '',
+                mobile: '',
+                orderDishes: []
+            }
         },
         created: function () {
             this.addr = Store.get('addr');
             this.userInfo = Store.get('userInfo');
             this.booking = {
-                date: '2015-11-18',
+                date: Store.get('orderDate'),
                 buildingId: this.addr.domainId,
                 roomNumber: '',
-                contact: this.userInfo.displayName,
+                contact: this.userInfo.displayName || '',
                 mobile: this.userInfo.mobile,
                 orderDishes: this.getCart()
-            }
+            };
             this.getCoupon();
         },
         methods: {
-            getCart: function () {
+            getCart: function (isPlaceOrder) {
                 var list = Store.get('list'),
                     cart = [];
                     if (list && list.length > 0) {
@@ -26,9 +32,9 @@ require(['vue', 'Zepto','req', 'Store'], function (Vue, $, Req, Store) {
                             if (list[i].bnum > 0) {
                                 var item = {};
                                 item.dishId = list[i].dishId;
-                                item.displayName = list[i].displayName;
-                                item.photo = list[i].photo;
-                                item.kitchenName = list[i].kitchenName;
+                                !isPlaceOrder && (item.displayName = list[i].displayName);
+                                !isPlaceOrder && (item.photo = list[i].photo);
+                                !isPlaceOrder && (item.kitchenName = list[i].kitchenName);
                                 item.price = list[i].price;
                                 item.number = list[i].bnum;
                                 cart.push(item);
@@ -39,11 +45,17 @@ require(['vue', 'Zepto','req', 'Store'], function (Vue, $, Req, Store) {
             },
             placeorder: function () {
                 Loading.showLoading();
+                //重置dishes对象
+                this.booking.orderDishes = this.getCart(true);
+                console.log(this.booking);
                 Req.execute('placeOrder', this.booking, function(data){
                     Loading.hideLoading();
                     console.log('OK');
-                }, function(data){
+                }, function(e){
+                    Loading.hideLoading();
+                    Msg.showMessage('抱歉，' + e.message);
                     console.log('FAIL');
+                    return;
                 }, this);
             },
             getCoupon: function () {

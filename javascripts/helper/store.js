@@ -20,7 +20,7 @@ define([], function () {
             return value;
         },
         remove: function (key) {
-            localStorage.remove(key);
+            localStorage.removeItem(key);
         }
     };
     return store;

@@ -28,6 +28,9 @@ require(['vue', 'Zepto', 'req', 'loading', 'message', 'Store'], function (Vue, $
             }
         },
         damp: false,
+        created: function () {
+            // Store.remove('list');
+        },
         methods:{
             clickAddr: function(e){
                 var $target = $(e.currentTarget),
@@ -280,6 +283,8 @@ require(['vue', 'Zepto', 'req', 'loading', 'message', 'Store'], function (Vue, $
                     d.setDate(d.getDate() + 1);
                     dateString = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
                 }
+
+                Store.set('orderDate', dateString);
 
                 Loading.showLoading();
                 Req.execute('reqMenu', {buildingId: this.locationId, date: dateString}, function(data){

@@ -4,8 +4,12 @@ define(['vue', 'Zepto', 'req', 'message', 'loading', 'Store'], function (Vue, $,
     var Index = new Vue({
         el: '#j_index',
         data: {
-            tel: '13452468794',
-            icode: '535369'
+            tel: '',
+            icode: ''
+        },
+        created: function () {
+            var userInfo = Store.get('userInfo');
+            this.tel = userInfo && userInfo.mobile;
         },
         methods: {
             //选择复选框

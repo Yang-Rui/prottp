@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>邻家美食-订单确认</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,minimal-ui">
         <link rel="stylesheet" href="./stylesheets/common.css">
@@ -12,7 +13,7 @@
         <div id='j_booking' class='booking'>
             <section class="ljms-blc">
                 <div class="booking-info clearfix"><i class="icon icon-person booking-info-icon" fl></i><input type="text" v-model="booking.contact" placeholder="请输入您的姓名" fr/></div>
-                <div class="booking-info clearfix"><i class="icon icon-tel booking-info-icon" fl></i><input type="tel"  v-model="booking.mobile" placeholder="请输入您的手机"fr/></div>
+                <div class="booking-info clearfix"><i class="icon icon-tel booking-info-icon" fl></i><input type="tel"  v-model="booking.mobile" placeholder="请输入您的手机"fr maxlength="11" /></div>
                 <div class="booking-info clearfix" style="line-height: 35px;"><i class="icon icon-loc booking-info-icon" fl></i>{{addr.name}}<input v-model="booking.roomNumber" style="width: 60%" placeholder="请输入办公室/房间号"fr /></div>
             </section>
             <section class="booking-detail ljms-blc">
@@ -38,8 +39,8 @@
             </section>
             <section class="booking-paymethod ljms-blc">
                 <ul class="booking-paymethod-list">
-                    <li>微信支付<i class="active" fr></i></li>
-                    <li>支付宝支付 <i fr></i></li>
+                    <li>微信钱包<i class="active" fr></i></li>
+                    <li disabled>支付宝 <i fr></i></li>
                 </ul>
             </section>
             <section class="booking-btn">
