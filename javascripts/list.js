@@ -267,7 +267,7 @@ require(['vue', 'Zepto', 'req', 'loading', 'message', 'Store'], function (Vue, $
                 }
                 Store.set('list', this.plist);
                 //先使用这种多页应用的写法
-                location.href = 'detail.html';
+                location.href = 'booking.html';
             },
             requestPList: function (notNow){
                 var d, dateString;
