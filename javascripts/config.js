@@ -8,7 +8,8 @@ var require = {
             loading: './com/loading',
             message: './com/message',
             wx: './lib/wx-1.0.0',
-            Store: './helper/store'
+            Store: './helper/store',
+            Util: './helper/util'
         },
         shim: {
         }

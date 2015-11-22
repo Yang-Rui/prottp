@@ -13,6 +13,11 @@
 .booking-info {
     padding: 6px 2px;
     border-bottom: 1px solid #ddd;
+    line-height: 32px;
+}
+.booking-info > [fl],
+.booking-info > [fr] {
+    margin-top: 8px;
 }
 .booking-info:last-child {
     border: none;
@@ -20,7 +25,7 @@
 .booking-info-icon {
 
 }
-.booking-info .icon {
+.booking-info > .icon {
     margin: 6px 2px 0 2%;
 }
 
@@ -49,10 +54,22 @@
     overflow: hidden;
     padding-left: 10px;
 }
+.booking-goods-info > * {
+    width: 100%;
+}
 .booking-cash-info {
     border-top: 1px solid #aaa;
     border-bottom: 1px solid #aaa;
     padding: 8px 0;
+}
+.order-dishes {
+    position: relative;
+    margin-left: 18px;
+}
+.order-dishes > .icon {
+    position: absolute;
+    left: -12px;
+    top: 1px;
 }
 .booking-paymethod-list li > i {
     display: block;
@@ -81,15 +98,25 @@
     padding: 10px;
     box-sizing: border-box;
 }
+.icon-date {
+    width: 20px;
+    height: 20px;
+    background-position: -32px -220px;
+}
 .icon-person {
     width: 20px;
     height: 20px;
     background-position: -54px -220px;
 }
-.icon-tel {
+.icon-order {
     width: 20px;
     height: 20px;
-    background-position: -190px -220px;
+    background-position: -98px -220px;
+}
+.icon-olist {
+    width: 20px;
+    height: 20px;
+    background-position: -120px -220px;
 }
 .icon-loc {
     width: 20px;

@@ -155,6 +155,15 @@ input::-webkit-input-placeholder{
     margin-right: 4px;
 }
 
+[balance] {
+    display: table;
+}
+[balance] > * {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: left;
+}
+
 /*定义基本class*/
 .hide{
     display: none !important;
@@ -178,6 +187,17 @@ input::-webkit-input-placeholder{
     background-image: url(../images/sprites.png);
     background-repeat: no-repeat;
     background-size: 427px 438px;
+}
+
+.icon-star {
+    width: 12px;
+    height: 12px;
+    background-position: -111px -47px;
+}
+.icon-star[active] {
+    width: 12px;
+    height: 12px;
+    background-position: -89px -47px;
 }
 /*渐显动画*/
 .opacity{

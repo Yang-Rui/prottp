@@ -61,17 +61,6 @@ to {transform: translateX(-100%);}
     right: 2px;
 }
 
-
-.icon-star {
-    width: 12px;
-    height: 12px;
-    background-position: -111px -47px;
-}
-.icon-star[active] {
-    width: 12px;
-    height: 12px;
-    background-position: -89px -47px;
-}
 .icon-heart {
     width: 12px;
     height: 12px;

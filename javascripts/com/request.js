@@ -24,7 +24,11 @@ define(['Zepto', 'Store'], function ($, Store) {
             //厨房评论
             reqComments: ['GET', 'unsecure/kitchen/{kitchenId}/commentList'],
             //生成订单
-            placeOrder: ['POST', 'api/order/new']
+            placeOrder: ['POST', 'api/order/new'],
+            //订单详情
+            orderDetail: ['GET', 'api/order/{orderId}'],
+            //评论
+            dishComment: ['POST', 'api/order/orderDish/{orderDishId}/comment']
         },
         /*
             发送网络请求
