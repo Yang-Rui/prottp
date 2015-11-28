@@ -67,7 +67,7 @@
                             <i class='icon icon-p' v-else></i>
                         </span>
                     </p>
-                    <div class='com'>
+                    <div class='com' data-kid='{{n.kitchenId}}' @click='clickKitchen'>
                         <img v-bind:src='n.userPhoto'>
                         <p>
                             <span class='t' fz-16>{{n.kitchenName}}<em fz-12 clr-lgrey>{{n.origin}}</em></span>

@@ -1,5 +1,5 @@
 //做路由切换时需要改为define
-require(['vue', 'Zepto','req', 'loading'], function (Vue, $, Req, Loading) {
+require(['vue', 'Zepto','req', 'loading', 'Util'], function (Vue, $, Req, Loading, Util) {
     var Detail = new Vue({
         el: '#j_detail',
         data: {
@@ -38,7 +38,7 @@ require(['vue', 'Zepto','req', 'loading'], function (Vue, $, Req, Loading) {
             }
         },
         created: function () {
-            var kitchenId = 11,
+            var kitchenId = Util.getQueryParam('kid') || 11,
                     page = 1;
                     numberPerPage = 20;
                 Loading.showLoading();

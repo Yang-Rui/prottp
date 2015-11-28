@@ -227,6 +227,12 @@ require(['vue', 'Zepto', 'req', 'loading', 'message', 'Store'], function (Vue, $
                 //触发子类的事件
                 $(this.$el).find('#j_fbar').addClass('hide');
             },
+            //点击某个厨房
+            clickKitchen: function (e) {
+                var $target = $(e.currentTarget),
+                    kid = $target.data('kid');
+                location.href = 'detail.html?kid=' + kid;
+            },
             //选择某个tab
             chooseTab: function (e) {
                 var $target = $(e.currentTarget),
@@ -275,7 +281,13 @@ require(['vue', 'Zepto', 'req', 'loading', 'message', 'Store'], function (Vue, $
                 }
                 Store.set('list', this.plist);
                 //先使用这种多页应用的写法
-                location.href = 'booking.html';
+                // location.href = 'booking.html';
+                var User = Store.get('userInfo');
+                if(User){
+                    location.href = 'booking.html';
+                }else{
+                    location.href = 'index.html';
+                }
             },
             requestPList: function (notNow){
                 var d, dateString;

@@ -63,7 +63,8 @@ define(['vue', 'Zepto', 'req', 'message', 'loading', 'Store'], function (Vue, $,
                 Req.execute('reqMyInfo', '', function(data){
                     Loading.hideLoading();
                     Store.set('userInfo', data);
-                    location.href = 'list.html';
+                    // location.href = 'list.html';
+                    location.href = 'booking.html';
                 }, function (){
                     Loading.hideLoading();
                     Msg.showMessage('网络开小差了,请重试');
