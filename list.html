@@ -108,8 +108,8 @@
                 <div class='mask'></div>
                 <div class='j_cont cont market-bg' clr-dgrey fz-14>
                     <ul>
-                        <template v-for='n in plist'>
-                            <li class='j_pitem' fz-14 br-ccc data-did={{n.dishId}}>
+                        <template v-for='n in plist' v-if='totalBnum > 0'>
+                            <li class='j_pitem' fz-14 br-ccc data-did={{n.dishId}} v-if='n.bnum > 0'>
                                 {{n.displayName}}
                                 <dfn fz-14>&yen;{{n.price}}</dfn>
                                 <span class='pbar' fr>
@@ -121,6 +121,7 @@
                                 </span>
                             </li>
                         </template>
+                        <li fz-14 v-if='totalBnum == 0'>购物车中空空如也</li>
                     </ul>
                 </div>
             </div>

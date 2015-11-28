@@ -121,6 +121,7 @@ require(['vue', 'Zepto', 'req', 'loading', 'message', 'Store'], function (Vue, $
                 //在子组件里有父对象完整的价格和数量映射
                 this.totalBnum = totalBnum;
                 this.totalPrice = totalPrice;
+
             }
         },
         methods:{
@@ -209,6 +210,13 @@ require(['vue', 'Zepto', 'req', 'loading', 'message', 'Store'], function (Vue, $
             'updateBnumAndPrice': function(bnum, price){
                 this.totalBnum = bnum;
                 this.totalPrice = price;
+            },
+            //弹出地址选择
+            'triggerAddrChoose': function (){
+                $(this.$el).find('.j_addr').removeClass('hide').addClass('top-in');
+                this.$broadcast('searchMenuInit', this.msg_pos);
+                //触发子类的事件
+                $(this.$el).find('#j_fbar').addClass('hide');
             }
         },
         methods:{
@@ -389,4 +397,11 @@ require(['vue', 'Zepto', 'req', 'loading', 'message', 'Store'], function (Vue, $
         }
     });
 
+    //增加对历史记录的处理
+    var historyAddr = Store.get('addr');
+    if(historyAddr){
+        List.$emit('chooseALocation', historyAddr);
+    }else{
+        List.$emit('triggerAddrChoose');
+    }
 })
