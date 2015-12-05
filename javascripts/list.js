@@ -166,6 +166,12 @@ require(['vue', 'Zepto', 'req', 'loading', 'message', 'Store'], function (Vue, $
                 username: ''
             }
         },
+        events:{
+            'initLMenu': function(data){
+                this.userimg = data.photo;
+                this.username = data.displayName || data.mobile;
+            }
+        },
         methods: {
             hide: function(){
                 var $dom = $(this.$el),
@@ -176,6 +182,14 @@ require(['vue', 'Zepto', 'req', 'loading', 'message', 'Store'], function (Vue, $
                     $cont.removeClass('left-out');
                     $dom.addClass('hide');
                 }, CONST_ANIMATE_TIMEOUT);
+            },
+            clickMyAccount: function(){
+                var userInfo = Store.get('userInfo');
+                if(!userInfo){
+                    Msg.showMessage('请先登录!');
+                }else{
+                    location.href = 'myaccount.html';
+                }
             }
         }
     });
@@ -329,7 +343,8 @@ require(['vue', 'Zepto', 'req', 'loading', 'message', 'Store'], function (Vue, $
                         this.plist = [];
                     }
                 }, function(data){
-                    //todo
+                    Loading.hideLoading();
+                    Msg.showMessage('没有搜索到任何菜品');
                 }, this);
             },
             //点击底部bar
@@ -362,6 +377,7 @@ require(['vue', 'Zepto', 'req', 'loading', 'message', 'Store'], function (Vue, $
                 $dom.removeClass('hide');
                 $cont.addClass('left-in');
                 this.hideBottomBar();
+                this.$broadcast('initLMenu', Store.get('userInfo'));
             },
             //显示菜的介绍
             showMsg: function(e){

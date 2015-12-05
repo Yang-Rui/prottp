@@ -128,16 +128,16 @@
         </template>
         <!--左侧菜单模板-->
         <template id='j_l_tpl'>
-            <div id='j_lmenu' class='lmenu hide' @click='hide'>
-                <div class='mask'></div>
+            <div id='j_lmenu' class='lmenu hide'>
+                <div class='mask' @click='hide'></div>
                 <ul id='j_lcont' bg-lgrey>
-                    <li br-ddd fz-14 v-if='userimg && username'>
-                        <img v-bind:src='{{userimg}}'/> {username}}
+                    <li br-ddd fz-14 v-if='userimg || username'>
+                        <img v-bind:src='{{userimg}}'/> {{username}}
                     </li>
                     <li br-ddd fz-14 v-else>
                         <i class='icon i-login'></i>登录
                     </li>
-                    <li br-ddd fz-14>
+                    <li br-ddd fz-14 @click='clickMyAccount'>
                         <i class='icon i-account'></i>我的账户
                     </li>
                     <li br-ddd fz-14>

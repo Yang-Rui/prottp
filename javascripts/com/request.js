@@ -62,8 +62,13 @@ define(['Zepto', 'Store'], function ($, Store) {
                 },
                 error: function (data) {
                     //错误状态下返回的是整个xmlhttpreq,需要手动提取response
-                    data = data && data.response && JSON.parse(data.response);
                     console.log(reqName + '请求失败');
+                    try{
+                        //返回的可能是一段HTML不能被json化
+                        data = data && data.response && JSON.parse(data.response);
+                    }catch(e){
+                        data = {};
+                    }
                     error && typeof error == 'function' && error.call(scope, data);
                 },
             });
