@@ -17,6 +17,8 @@ define(['Zepto', 'Store'], function ($, Store) {
             reqMyInfo: ['GET', 'api/user/me'],
             //查询位置
             reqLocation: ['GET', 'unsecure/buildings'],
+            //修改密码
+            reqChangePWD: ['POST', 'api/user/changePassword'],
             //请求菜单
             reqMenu: ['GET', 'unsecure/menu/{buildingId}/{date}'],
             //厨房信息

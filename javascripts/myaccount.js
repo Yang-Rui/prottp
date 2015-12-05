@@ -11,7 +11,7 @@ define(['vue', 'Zepto', 'req', 'message', 'loading', 'Store'], function (Vue, $,
         created: function () {
             var userInfo = Store.get('userInfo');
             if(!userInfo){
-                location.href = 'index.html';
+                location.href = 'list.html';
             }
             this.userimg = userInfo.photo;
             this.username = userInfo.displayName;
@@ -23,7 +23,8 @@ define(['vue', 'Zepto', 'req', 'message', 'loading', 'Store'], function (Vue, $,
                 location.href = 'pwdchange.html';
             },
             quit: function () {
-                //todo
+                Store.set('userInfo', undefined);
+                history.back(-1);
             }
         }
     });
