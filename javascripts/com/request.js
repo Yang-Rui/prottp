@@ -28,7 +28,9 @@ define(['Zepto', 'Store'], function ($, Store) {
             //订单详情
             orderDetail: ['GET', 'api/order/{orderId}'],
             //评论
-            dishComment: ['POST', 'api/order/orderDish/{orderDishId}/comment']
+            dishComment: ['POST', 'api/order/orderDish/{orderDishId}/comment'],
+            //订单列表
+            orderList: ['GET', 'api/order/me']
         },
         /*
             发送网络请求

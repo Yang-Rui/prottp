@@ -154,13 +154,22 @@ input::-webkit-input-placeholder{
 [mgr="4"] {
     margin-right: 4px;
 }
-
+[tc=l] {
+    text-align: left !important;
+}
+[tc=c] {
+    text-align: center !important;
+}
+[tc=r] {
+    text-align: right !important;
+}
 [balance] {
-    display: table;
+    display: flex !important;
+    width: 100%;
+    align-items: center;
 }
 [balance] > * {
-    display: table-cell;
-    vertical-align: middle;
+    flex: 1;
     text-align: left;
 }
 
@@ -325,6 +334,34 @@ input::-webkit-input-placeholder{
     margin: 0 -6px;
     padding: 4px 6px 10px;
     box-shadow: 0 1px 0 0px #dadada;
+}
+.ljms-blc[link] {
+    padding-right: 20px;
+    position: relative;
+}
+.ljms-blc[link]:active {
+    background-color: #efefef;
+}
+.ljms-blc[link]:after {
+    content: ' ';
+    display: inline-block;
+    background-image: url(../images/sprites.png);
+    background-repeat: no-repeat;
+    background-size: 427px 438px;
+    width: 20px;
+    height: 20px;
+    background-position: -217px -219px;
+    position: absolute;
+        top: 50%;
+    transform: translateY(-50%);
+}
+.col2 {
+    float: left;
+    width: 50%;
+}
+.col3 {
+    float: left;
+    width: 33.3333%;
 }
 .tip {
     font-size: 12px;

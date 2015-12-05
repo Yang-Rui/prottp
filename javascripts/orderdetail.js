@@ -7,7 +7,6 @@ require(['vue', 'Zepto','req', 'loading', 'Store', 'message', 'Util'], function 
         },
         created: function () {
             Loading.showLoading();
-            console.log(Util.getQueryParam('orderId'));
             Req.execute('orderDetail', {orderId: Util.getQueryParam('orderId')}, function(data){
                     this.detail = data;
                     Loading.hideLoading();
