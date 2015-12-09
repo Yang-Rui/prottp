@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>邻家美食-登陆</title>
+        <title>邻家美食-菜单</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,minimal-ui">
         <link rel="stylesheet" href="./stylesheets/common.css">
@@ -10,19 +10,147 @@
         <script type='text/javascript' data-main='./javascripts/index.js' src='./javascripts/lib/require.js'></script>
     </head>
     <body>
+        <div bg-fff id='j_list' class='list'>
+            <searchmenu></searchmenu>
+            <p class='nav'>
+                <i @click='clickLMenuBtn' class='icon icon-rm'></i>
+                <span fz-14 v-on:click='onClickAddr'>
+                    <i class='icon icon-pos'></i>
+                    {{msg_pos}}
+                    <i class='icon icon-arr-d'></i>
+                </span>
+            </p>
+            <div class='tab'>
+                <ul>
+                    <li br-grey hr-ora fz-14 clr-grey class='current' v-on:click='chooseTab' data-type='0'>今日预订</li>
+                    <li br-grey hr-ora fz-14 clr-grey v-on:click='chooseTab' data-type='1'>明日预订</li>
+                </ul>
+                <span bg-ora id='j_bar'></span>
+            </div>
 
-        <div id='j_index' class='index'>
-            <p class='icon icon-title'></p>
-            <p id='j_tel' class='int'>
-                <input maxlength="11" br-grey type="num" placeholder='请输入手机号码' v-model="tel">
-            </p>
-            <p id='j_icode' class='int int2'>
-                <input maxlength="6" br-grey type="num" placeholder='请输入验证码' v-model="icode">
-                <span br-grey clr="ora" @click='onClickICode'>获取验证码</span>
-            </p>
-            <p class='wp' clr-grey><i br-grey v-on:click='chooseProt'></i>我已看过并同意餐桌网<a clr="ora" v-on:click='clickProt'>用户服务协议</a></p>
-            <button bg-ora class='btn' v-on:click='onSubmit'>验证码登录</button>
+            <!-- <ul class='hide'></ul> -->
+            <ul id='j_ilist' class='ilist hide' bg-lgrey >
+                <li class='j_pitem' bg-fff br-grey v-for="n in plist" data-did={{n.dishId}}>
+                    <div @click='showMsg' class='imgd j_dish'>
+                        <img v-bind:src="n.photo">
+                        <p id='j_sbar' bg-op>
+                            <span clr="fff">辣度</span>
+                            <span>
+                                <template v-for='i in 3'>
+                                    <i v-if='i < n.spiciness' class="icon icon-hg current" ></i>
+                                    <i v-else class="icon icon-hg"></i>
+                                </template>
+                            </span>
+                            <span clr="fff" fr>剩余&nbsp;{{n.inStock}}/{{n.inStock + n.soldOut}}&nbsp;份</span>
+                        </p>
+                        <div clr="fff" bg-op class='j_desc hide'>
+                        {{n.description}}
+                            <p>
+                                <span clr="fff">辣度</span>
+                                <span>
+                                    <template v-for='i in 3'>
+                                        <i v-if='i < n.spiciness' class="icon icon-hg current" ></i>
+                                        <i v-else class="icon icon-hg"></i>
+                                    </template>
+                                </span>
+                                <span clr="fff" fr>剩余&nbsp;{{n.inStock}}/{{n.inStock + n.soldOut}}&nbsp;份</span>
+                            </p>
+                        </div>
+                    </div>
+                    <p fz-16 br-grey class='con'>{{n.displayName}}
+                        <dfn clr="red" fz-16>&yen;{{n.price}}</dfn>
+                        <span class='pbar' fr>
+                            <i class='icon icon-r' v-if='n.bnum == 0'></i>
+                            <i class='icon icon-r on' v-else @click='clickReduce'></i>
+                            <i fz-16>{{n.bnum || 0}}<em fz-12>份</em></i>
+                            <i class='icon icon-p on' @click='clickAdd' v-if='n.bnum < n.inStock'></i>
+                            <i class='icon icon-p' v-else></i>
+                        </span>
+                    </p>
+                    <div class='com' data-kid='{{n.kitchenId}}' @click='clickKitchen'>
+                        <img v-bind:src='n.userPhoto'>
+                        <p>
+                            <span class='t' fz-16>{{n.kitchenName}}<em fz-12 clr-lgrey>{{n.origin}}</em></span>
+                            <!--<span class='r' fz-12 clr="ora" br-org>休息中，可预订明天</span>-->
+                            <span class='s'>
+                                <template v-for='i in 5'>
+                                    <i class="icon star on" v-if='i < n.rating'></i>
+                                    <i class="icon star" v-else></i>
+                                </template>
+                            </span>
+                            <span class='b' clr-grey fz-12>{{n.comments}}评论·{{n.sales}}份</span>
+                        </p>
+                    </div>
+                </li>
+            </ul>
+
+            <marketbox></marketbox>
+            <leftmenu></leftmenu>
+            <p class='fbar hide' id='j_fbar' clr-dgrey br-ccc fz-14 v-on:click='clickbbar'><i class='icon icon-m'></i>&yen{{totalPrice}}（{{totalBnum}}份）<button bg-ora fz-14 class='btn' v-on:click='onSubmit'>{{msg_btn}}</button></p>
         </div>
-
+        <!--搜索菜单模板-->
+        <template id='j_sm_tpl'>
+            <div class='j_addr search hide' bg-fff>
+                <div bg-ccc>
+                    <i class='icon p'></i>
+                    <input id='j_input' fz-14 type="text" @input='inputAddr' placeholder={{msg_placeholder}} value='{{input_val}}'>
+                    <span clr="red" v-on:click='clickCancel'>取消</span>
+                </div>
+                <p id='j_warns' class='warns' fz-14>{{nolocation_msg}}</p>
+                <ul id='j_llist' class='llist'>
+                    <li @click='clickAddr' v-for='n in llist' br-grey fz-14 data-id={{n.id}}>{{n.name}}&nbsp;(&nbsp;{{n.address}}&nbsp;)&nbsp;</li>
+                </ul>
+            </div>
+        </template>
+        <!--购物车模板-->
+        <template id='j_m_tpl'>
+            <div class='j_market market hide'>
+                <div class='mask'></div>
+                <div class='j_cont cont market-bg' clr-dgrey fz-14>
+                    <ul>
+                        <template v-for='n in plist' v-if='totalBnum > 0'>
+                            <li class='j_pitem' fz-14 br-ccc data-did={{n.dishId}} v-if='n.bnum > 0'>
+                                {{n.displayName}}
+                                <dfn fz-14>&yen;{{n.price}}</dfn>
+                                <span class='pbar' fr>
+                                    <i class='icon icon-r' v-if='n.bnum == 0'></i>
+                                    <i class='icon icon-r on' v-else @click='clickReduce'></i>
+                                    <i fz-14>{{n.bnum}}</i>
+                                    <i class='icon icon-p on' @click='clickAdd' v-if='n.bnum < n.inStock'></i>
+                                    <i class='icon icon-p' v-else></i>
+                                </span>
+                            </li>
+                        </template>
+                        <li fz-14 v-if='totalBnum == 0'>购物车中空空如也</li>
+                    </ul>
+                </div>
+            </div>
+        </template>
+        <!--左侧菜单模板-->
+        <template id='j_l_tpl'>
+            <div id='j_lmenu' class='lmenu hide'>
+                <div class='mask' @click='hide'></div>
+                <ul id='j_lcont' bg-lgrey>
+                    <li br-ddd fz-14 v-if='userimg || username'>
+                        <img v-bind:src='{{userimg}}'/> {{username}}
+                    </li>
+                    <li br-ddd fz-14 v-else>
+                        <i class='icon i-login'></i>登录
+                    </li>
+                    <li br-ddd fz-14 @click='clickMyAccount'>
+                        <i class='icon i-account'></i>我的账户
+                    </li>
+                    <li br-ddd fz-14>
+                        <i class='icon i-order'></i>历史订单
+                    </li>
+                    <li br-ddd fz-14>
+                        <i class='icon i-config'></i>设置
+                    </li>
+                    <li br-ddd fz-14>
+                        <i class='icon i-about'></i>关于我们
+                    </li>
+                </ul>
+            </div>
+        </template>
     </body>
 </html>

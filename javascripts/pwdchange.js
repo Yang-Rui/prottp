@@ -9,7 +9,7 @@ define(['vue', 'Zepto', 'req', 'message', 'loading', 'Store'], function (Vue, $,
         created: function () {
             var userInfo = Store.get('userInfo');
             if(!userInfo){
-                location.href = 'list.html';
+                location.href = 'index.html';
             }
             this.mobile = userInfo.mobile;
         },

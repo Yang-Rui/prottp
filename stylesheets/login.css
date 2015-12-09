@@ -1,0 +1,79 @@
+@charset "utf-8";
+.index{
+    margin: 0 20px;
+}
+.index .int{
+    position: relative;
+    overflow: hidden;
+    height: 40px;
+    margin-bottom: 10px;
+}
+.index .int2 input{
+    padding-right: 90px;
+}
+.index .int2 span{
+    position: absolute;
+    z-index: 1;
+    display: block;
+    top: 10px;
+    right: 0;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 10px;
+    border-width: 0;
+    border-left-width: 1px;
+}
+.index input{
+    -webkit-box-sizing:border-box;
+    box-sizing: border-box;
+    border-radius: 3px;
+    padding: 10px;
+    width: 100%;
+}
+.index .wp{
+    position: relative;
+    padding-left: 22px;
+}
+.index .wp i{
+    display: inline-block;
+    background-color: #fff;
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    left: 0;
+    top: 1px;
+}
+.index .wp i.current:before,
+.index .wp i.current:after{
+    content: '';
+    position: absolute;
+    background-color: red;
+}
+.index .wp i.current:before{
+    width: 2px;
+    height: 7px;
+    left: 3px;
+    top: 5px;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    border-radius: 2px;
+}
+.index .wp i.current:after{
+    width: 2px;
+    height: 10px;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    right: 4px;
+    top: 2px;
+    border-radius: 2px;
+}
+.index .btn{
+    margin-top: 40px;.
+}
+.index .icon.icon-title{
+    width: 86px;
+    height: 94px;
+    background-position: -91px -294px;
+    margin: 70px auto 40px auto;
+    display: block;
+}
