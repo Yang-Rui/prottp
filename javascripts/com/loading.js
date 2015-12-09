@@ -17,7 +17,7 @@ define([''], function () {
             var d = document.createElement('div');
             d.className = 'mask';
             d.style.zIndex = '1000';
-            d.innerHTML = "<div class='center'><p class='loading'></p><p class='loading-word' fz-14>" + msg + "</p></div>";
+            d.innerHTML = "<div class='center'><div class='loader-inner ball-spin-fade-loader'><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div><p class='loading-word' fz-14>" + msg + "</p></div>";
             document.body.appendChild(d);
             document.body.style.overflow = 'hidden';
             this._instance = d;
