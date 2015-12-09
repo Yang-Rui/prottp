@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>邻家美食-评论</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,minimal-ui">
+        <link rel="stylesheet" href="./stylesheets/common.css">
+        <link rel="stylesheet" href="./stylesheets/comment.css">
+        <link rel="stylesheet" href="./stylesheets/detail.css">
+        <script type='text/javascript' src='./javascripts/config.js'></script>
+        <script type='text/javascript' data-main='./javascripts/comment.js' src='./javascripts/lib/require.js'></script>
+    </head>
+    <body>
+
+        <div id='j_comment' class='comment'>
+            <section class="kitchen-detail ljms-blc">
+                <img class="kitchen-avatar avatar" v-bind:src="kitchen.userPhoto" fl />
+                <div class="kitchen-desc">
+                    <div class="kitchen-brief">
+                        <p><span fz=16>{{kitchen.displayName}}</span><span class="tip">{{kitchen.origin}}</span></p>
+                        <p>
+                            <i class="icon icon-star" v-for="n in 5" v-if="n < kitchen.rating" active></i><i class="icon icon-star" v-for="n in 5" v-if="n < (5 - kitchen.rating)"></i>
+                            <span clr="grey">{{kitchen.sales}}份</span>
+                        </p>
+                        <p><i class="icon icon-heart" mgr=4></i>拿手菜: <span>{{kitchen.specialities}}</span></p>
+                    </div>
+                </div>
+                <p class='starlist'>
+                    <template v-for='n in 5'>
+                        <i v-if='n < rating' class='current' @click='chooseStar'></i>
+                        <i v-else @click='chooseStar'></i>
+                    </template>
+                </p>
+                <textarea name="" id="" cols="30" rows="10" placeholder='给阿姨一个感谢，一个意见，一个祝福，就会非常开心' value={{content}}></textarea>
+            </section>
+            <div class='bottom' br-ccc id='j_bottom'>
+                <button bg-ora class='btn' @click='confirm'>完成</button>
+            </div>
+        </div>
+
+    </body>
+</html>

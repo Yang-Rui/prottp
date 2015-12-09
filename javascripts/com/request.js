@@ -25,6 +25,8 @@ define(['Zepto', 'Store'], function ($, Store) {
             reqKitchenInfo: ['GET', 'unsecure/kitchen/{kitchenId}'],
             //厨房评论
             reqComments: ['GET', 'unsecure/kitchen/{kitchenId}/commentList'],
+            //厨房带评论菜品列表
+            reqDishToComment: ['GET', 'api/kitchen/{kitchenId}/toComment'],
             //生成订单
             placeOrder: ['POST', 'api/order/new'],
             //订单详情
