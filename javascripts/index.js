@@ -190,6 +190,9 @@ require(['vue', 'Zepto', 'req', 'loading', 'message', 'Store'], function (Vue, $
                 }else{
                     location.href = 'myaccount.html';
                 }
+            },
+            tologin: function(){
+                location.href = 'login.html';
             }
         }
     });

@@ -26,6 +26,10 @@ button{
     border: 0;
     outline: none;
 }
+input{
+    -webkit-appearance: none;
+    -webkit-user-select: text;
+}
 li{
     list-style: none;
 }

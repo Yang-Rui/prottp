@@ -93,7 +93,7 @@
             <div class='j_addr search hide' bg-fff>
                 <div bg-ccc>
                     <i class='icon p'></i>
-                    <input id='j_input' fz-14 type="text" @input='inputAddr' placeholder={{msg_placeholder}} value='{{input_val}}'>
+                    <input id='j_input' fz-14 type="text" @input='inputAddr' placeholder={{msg_placeholder}} v-model='input_val'>
                     <span clr="red" v-on:click='clickCancel'>取消</span>
                 </div>
                 <p id='j_warns' class='warns' fz-14>{{nolocation_msg}}</p>
@@ -134,7 +134,7 @@
                     <li br-ddd fz-14 v-if='userimg || username'>
                         <img v-bind:src='{{userimg}}'/> {{username}}
                     </li>
-                    <li br-ddd fz-14 v-else>
+                    <li br-ddd fz-14 v-else @click='tologin'>
                         <i class='icon i-login'></i>登录
                     </li>
                     <li br-ddd fz-14 @click='clickMyAccount'>

@@ -23,7 +23,7 @@ define(['vue', 'Zepto', 'req', 'message', 'loading', 'Store'], function (Vue, $,
                 location.href = 'pwdchange.html';
             },
             quit: function () {
-                Store.set('userInfo', undefined);
+                Store.set('userInfo', '');
                 history.back(-1);
             }
         }
